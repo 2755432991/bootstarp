@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/grid.css">
+	<link rel="stylesheet" href="css/text.css">
+	<link rel="stylesheet" href="css/default.css">
+	<script src="js/jquery-1.4.2.min.js"></script>
+	<script src="js/jquery-ui-1.8.custom.min.js"></script>
+	<script src="js/jquery.ui.selectmenu.js"></script>
+	<script src="js/falcon.js"></script>
+	<script src="js/jsdelivr.js"></script>
+	<script src="js/template.js"></script>
+	<script src="ckplayer/ckplayer.js"></script>
+	<script type="text/template" id="template">
+		<% for(var i=0; i<selectOptions.length;i++){ %>
+		   <option><%= selectOptions[i] %></option>
+		<% } %>
+	</script>
+	
+</head>
+<body>
+	<div class="container_24">
+		<div id="header">
+			<div class="grid_12" id="logo">
+				<img src="images/logo_index.png" alt="logo" id="Falcon_Admin" style="display: none">
+				<img src="images/logo_index_1.jpg" alt="logo" id="Falcon_Admin_1" style="display: none">
+				<img src="images/logo_index_2.png" alt="logo" id="Falcon_Admin_2" style="display: none">
+				<h1 id="logo_chinese" style="font-size: 33px;color: #ffffff;display: none;margin-left: 20px;">金&nbsp和&nbsp智&nbsp能&nbsp转&nbsp码&nbsp器</h1>
+			</div>
+			<div style="float:right; margin-right:0px; margin-top:0px; padding-right:15px; padding-top:15px; color:rgb(255,255,255)">
+				<p>language:&nbsp;
+					<select id='LanSle' onChange="changeLan()" >
+			           <option value="Chinese" >Chinese</option>
+			　　　　　 <option value="English" selected="selected">English</option>
+					</select>
+				</p>
+				<p id="QQ_logo" style="margin-top:5px;font-size: 18px;display: none ">QQ :376440003</p>
+				<p id="QQ_logo_1" style="margin-top:5px;font-size: 18px;display: none ">QQ :396413296</p>
+				<p id="QQ_logo_2" style="margin-top:5px;font-size: 18px;display: none">QQ :1047314336</p>
+			</div>
+		</div>
+		<div class="grid_24" id="quick">
+		</div>
+		<div class="grid_24" id="content">
+			<div id="content-inner">
+				<div class="grid_6" id="left">
+					<ul id="menu">
+						<li><h6 id="h6_un"><a href="indexE.html" id="status_display"><span>Status display</span></a></h6></li>
+						<li><h6><a href="onvifE.html"><span>Onvif device discovery</span></a></h6></li>
+						<li><h6><a href="playbackE.html"><span>Video playback</span></a></h6></li>
+						<li><h6><a href="outputMainE.html"><span>Stream setting</span></a></h6></li>
+						<li><h6><a href="setNetE.html"><span>System settings</span></a></h6>
+							<ul id="menu_users">
+								<li><a href="setNetE.html">Network setting</a></li>
+								<li id="enablegetway" style="display: none;"><a href="setLanE.html">Lan setting</a></li>
+								<li id="g4"><a href="g4SetE.html">4G settings</a></li>
+								<li><a href="setPasswordE.html">Password setting</a></li>
+								<li><a href="remserialE.html">Serial port passthrough</a></li>
+								<li><a href="systemUpdateE.html">System update</a></li>
+								<li><a href="fileRecoveryE.html">Backup files and restore</a></li>
+								<li><a href="resdkE.html">Format the storage device</a></li>
+								<li><a href="resetE.html">Factory data reset</a></li>
+								<li><a href="rebootE.html">Restart the device</a></li>
+								<li><a href="restartE.html">Time for restart</a></li>
+								<li class="last"><a href="startPushE.html">Regularly push</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="grid_18" id="right">
+					<div id="forms">
+						<form action="" method="post">
+							<div class="form">
+								<div class="title">
+									<h4>stream setting</h4>
+								</div>
+								<div class="fields">
+									<div class="field">
+										<div class="label">
+											<label>stream：</label>
+										</div>
+										<div class="select" id="selectOption">
+											<select id="selectChannel" onchange="getStatus()"></select>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Playback:</label>
+										</div>
+										<div class="select">
+											<select name="venc_codec_video" id="venc_codec_video">
+												<option value="0">disable</option>
+												<option value="1">enable</option>
+											</select>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Audio coding:</label>
+										</div>
+										<div class="select">
+											<select name="aenc_code" id="aenc_code">
+											    <option value="1">G711-U</option>
+											    <option value="2">G711-A</option>
+											    <option value="4">AAC</option>
+											</select>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Audio Settings:</label>
+										</div>
+										<div class="select">
+											<select name="audioEnable" id="audioEnable">
+												<option value="0">disable</option>
+												<option value="1">enable</option>
+												<option value="2">Only audio</option>
+											</select>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Audio source:</label>
+										</div>
+										<div class="select">
+											<select name="aenc_input" id="aenc_input">
+												<option value="0">Network coding camera</option>
+												<option value="1">Local analog audio</option>
+											</select>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Audio volume:</label>
+										</div>
+										<div class="input">
+											<input name="analog_vol" id="analog_vol" /> <span>[10-56]</span>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Audio sampling rate:</label>
+										</div>
+										<div class="select">
+											<select name="aenc_samplerate" id="aenc_samplerate">
+												<option value="0">automatic</option>
+												<option value="8000">8000</option>
+												<option value="16000">16000</option>
+												<option value="32000">32000</option>
+												<option value="44100">44100</option>
+												<option value="48000">48000</option>
+												<option value="96000">96000</option>
+											</select>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Audio baud rate:</label>
+										</div>
+										<div class="input">
+											<input id="aenc_bitrate" name="aenc_bitrate"  size="40" type ="text"/>
+										</div>
+									</div>
+									<div class="field" id="flv" style="display: none;">
+										<div class="label">
+											<label>FLV URL：</label>
+										</div>
+										<div class="input select">
+											<input id="http_flv_uriTxt" name="http_flv_uriTxt"  size="40" type ="text" />
+											<select id="http_flv_enableSle" name="http_flv_enableSle" width="10px">
+											    <option  value="0" selected ="selected">disable</option>
+											    <option  value="1" >enable</option> 
+											</select>  
+										</div>
+									</div>
+									<div class="field" >
+										<div class="label">
+											<label>RTST username:</label>
+										</div>
+										<div class="input">
+											<input type="text" id="rtsp_username" name="rtsp_username"  size="40" type ="text"/>
+										</div>
+									</div>
+									<div class="field" >
+										<div class="label">
+											<label>RTST password:</label>
+										</div>
+										<div class="input">
+											<input type="text" id="rtsp_password" name="rtsp_password"  size="40" type ="text"/>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label" >
+											<label>RTSP URL：</label>
+										</div>
+										<div class="input select">
+											<input id="rtsp_uriTxt" name="rtsp_uriTxt"  size="40" type ="text"  />  
+											<select id="rtsp_enableSle" name="rtsp_enableSle">
+											      <option  value="0" selected ="selected">disable</option>
+											      <option  value="1" >enable</option> 
+											</select> 
+											<input type="button" id="copy_name" name="copy_name" value="copy" onclick="copyRtsp()" />
+										</div>
+									</div>
+									<div class="field" id="rtmp_publish">
+										<div class="label" >
+											<label>RTMP release address 1:</label>
+										</div>
+										<div class="input select">
+											<input id="rtmp_publish_url" name="rtmp_publish_url" size="40"  type ="text" readonly="true" />
+											<select id="rtmp_enableSle" name="select_lit" >
+											    <option  value="0" selected ="selected">disable</option>
+											    <option  value="1" >enable</option> 
+											</select>
+											<input type="button" id="video_play" name="video_play" value="play" onclick="rtmpPlay()" />
+										</div>
+									</div>
+									<div class="field" id="live_publish">
+										<div class="label">
+											<label>RTMP release address 2:</label>
+										</div>
+										<div class="input select">
+											<input id="live_publish_url" name="live_publish_url" size="40"  type ="text"/>
+											<select id="live_enable" name="live_enable" >
+											    <option  value="0" selected ="selected">disable</option>
+											    <option  value="1" >enable</option> 
+											</select>
+											<input type="button" id="video_play_two" name="video_play_two" value="play" onclick="videoplayTwo()" />
+										</div>
+									</div>
+									<div class="field" id="http_hls_out" style="display: none">
+										<div class="label">
+											<label>http_hls_url address:</label>
+										</div>
+										<div class="input select">
+											<input id="http_hls_uri" name="http_hls_uri" size="40"  type ="text"/>
+											<select id="http_hls_enable" name="http_hls_enable">
+											    <option  value="0" selected ="selected">disable</option>
+											    <option  value="1" >enable</option> 
+											</select>
+											<input type="button" id="video_play_hls" name="video_play_hls" value="play" onclick="hlsPlay()" />
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>IP UDP TS stream output:</label>
+										</div>
+										<div class="input select">
+											<input id="multicast_ip" name="multicast_ip"  size="40" type ="text"/>
+											<select id="multicast_enable" name="multicast_enable" >
+											   <option  value="0" >disable</option>
+											   <option  value="1" >enable</option> 
+											</select>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>UDP TS stream output port:</label>
+										</div>
+										<div class="input">
+											<input id="multicast_port" name="multicast_port" size="40" type ="text" min="1" max="65535"/>[1-65535]
+										</div>
+									</div>
+									<div class="buttons">
+										<input type="button" name="submit" value="setting" id="button" onClick="setInput()" />
+										<span id="successfully" style="font-size: 18px;font-weight:700;color:red;display: none;">&nbsp;setting success!</span>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid_24" id="footer"></div>
+		<div class="clear"></div>
+	</div>
+	<div class="mask" style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;display: none;background: rgba(180,180,180,0.5);">
+		<div class="playerMask" style="position:relative;background: #000; display: inline-block;width: 640px;height: 380px;left: 50%;top: 50%;margin-left: -320px;margin-top: -190px;">
+			<div class="closeBtn" style="position: absolute;top: 0;right: 0;width: 20px;height: 20px;background: #fff;color: #000;font-size: 20px;line-height: 20px;text-align: center;cursor: pointer;" onclick="closePlayer()">x</div>
+			<div id="player" style="margin-top: 20px;width: 640px;height: 360px;"></div>
+		</div>
+	</div>
+
+	<script>
+		
+		// 默认选择第一个通道
+		var selectNumber = 0;
+		// 播放器
+		var player = null;
+		var jsonobj = {};
+
+		// 入口函数
+		$(function(){
+			// 判读是否登陆
+			var info = sessionStorage.getItem('access');
+			if(!info){
+				window.location.href = "loginE.html"
+			}else{
+				getDetailData()
+			}
+		})
+
+		// 获取数据
+		function getDetailData() {
+			var info = sessionStorage.getItem('access');
+			$.ajax({
+				type:"post",
+				url:"/getConfig",
+				data:info,
+				success:function(data){
+					jsonobj = data;
+
+					// 显示logo
+					var logo=jsonobj.syscontrol[0].display_log;
+					if(logo==1){
+					    $("#Falcon_Admin").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo").show();
+					     document.title = 'rtsp转rtmp推流器';
+					}else if(logo==0){
+					     $("#Falcon_Admin").hide();
+					     $("#logo_chinese").hide();
+					}else if(logo==2){
+					     $("#Falcon_Admin").hide();
+					     $("#logo_chinese").show();
+					     document.title = '金和智能转码器';
+					}else if(logo==3){
+					     $("#Falcon_Admin_1").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo_1").show();
+					     document.title = '政凯秀直播';
+					}else if(logo==4){
+					     $("#Falcon_Admin_2").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo_2").show();
+					     document.title = '同位onvif推流器';
+					}
+
+					// 隐藏显示局域网
+					var enable = jsonobj.ipinfo[0].local_net.enable;
+					if(enable == 0){
+						 $("#enablegetway").css("display","none");
+					}else if(enable == 1){
+						 $("#enablegetway").css("display","block");
+					}
+
+					var selectOptions = [];
+					var vencObj = jsonobj.encode[0].venc_param;
+					var aencObj = jsonobj.encode[0].aenc_param;
+					var selectOptions = [];
+					//判断有没有这个存这个值
+					if(sessionStorage.currentSelected){
+					   selectNumber =  parseInt(sessionStorage.getItem('currentSelected'));
+					}
+					for(var key in vencObj){
+					    selectOptions.push(parseInt(key)+1);
+					}
+					var select = template('template',{selectOptions:selectOptions});
+					$('#selectChannel').html(select);
+					$('#selectChannel').val(selectNumber + 1);
+					$("#audioEnable").val(vencObj[selectNumber].audioEnable);
+					$("#venc_codec_video").val(vencObj[selectNumber].recordEnable);
+					$("#aenc_bitrate").val(aencObj[selectNumber].aenc_bitrate);
+					$("#aenc_input").val(aencObj[selectNumber].aenc_input);
+					$("#analog_vol").val(aencObj[selectNumber].analog_vol);
+					$("input[name='http_flv_uriTxt']").val(vencObj[selectNumber].http_flv_uri);
+					$("input[name='rtsp_uriTxt']").val(vencObj[selectNumber].rtsp_uri);
+					$("input[name='rtmp_publish_url']").val(vencObj[selectNumber].rtmp_publish_uri);
+					$("input[name='live_publish_url']").val(vencObj[selectNumber].live_publish_url);
+					$("input[name='multicast_ip']").val(vencObj[selectNumber].multicast_ip);
+					$("input[name='multicast_port']").val(vencObj[selectNumber].multicast_port);
+					$("#http_flv_enableSle").val(vencObj[selectNumber].http_flv_enable);
+					$("#rtsp_enableSle").val(vencObj[selectNumber].rtsp_enable);
+					$("#rtmp_enableSle").val(vencObj[selectNumber].rtmp_enable);
+					$("#multicast_enable").val(vencObj[selectNumber].multicast_enable);
+					$("input[name='rtsp_password']").val(vencObj[selectNumber].rtsp_password);
+					$("input[name='rtsp_username']").val(vencObj[selectNumber].rtsp_username);
+
+					var hlsEnable  = jsonobj.encode[0].venc_param[selectNumber].http_hls_enable;
+					if(hlsEnable == 1){
+					   $("#live_enable").val(hlsEnable);
+					}else{
+					   $("#live_enable").val(vencObj[selectNumber].live_enable);
+					}
+					$("#live_enable").val(vencObj[selectNumber].live_enable);
+					$("#http_hls_uri").val(vencObj[selectNumber].http_hls_uri);
+					$("#http_hls_enable").val(vencObj[selectNumber].http_hls_enable);
+					var rtmp_publish_enable_write=vencObj[selectNumber].rtmp_publish_enable_write;
+					if(aencObj[selectNumber].aenc_code == 0){
+					    $("#aenc_code").val(0) ;
+					}else if(aencObj[selectNumber].aenc_code == 1){
+					    $("#aenc_code").val(1) ;
+					}else if(aencObj[selectNumber].aenc_code == 2){
+					    $("#aenc_code").val(2) ;
+					}else if(aencObj[selectNumber].aenc_code == 3){
+					    $("#aenc_code").val(3) ;
+					}else if(aencObj[selectNumber].aenc_code == 4){
+					    $("#aenc_code").val(4) ;
+					}
+
+					if(aencObj[selectNumber].aenc_samplerate == 0){
+					   $("#aenc_samplerate").val(0) ;
+					}else if(aencObj[selectNumber].aenc_samplerate == 8000){
+					   $("#aenc_samplerate").val(8000) ;
+					}else if(aencObj[selectNumber].aenc_samplerate == 16000){
+					   $("#aenc_samplerate").val(16000) ;
+					}else if(aencObj[selectNumber].aenc_samplerate == 32000 ){
+					   $("#aenc_samplerate").val(32000) ;
+					}else if(aencObj[selectNumber].aenc_samplerate == 44100){
+					   $("#aenc_samplerate").val(44100) ;
+					}else if(aencObj[selectNumber].aenc_samplerate == 48000){
+					   $("#aenc_samplerate").val(48000) ;
+					}else if(aencObj[selectNumber].aenc_samplerate == 96000){
+					   $("#aenc_samplerate").val(96000) ;
+					}
+					if(rtmp_publish_enable_write==1){
+					   document.getElementById("rtmp_publish_url").readOnly=false;
+					   }else if(rtmp_publish_enable_write==0){
+					   document.getElementById("rtmp_publish_url").readOnly=true;
+					}
+					var hlsout_enable = jsonobj.syscontrol[0].hlsout_enable;
+					if(hlsout_enable == 1){
+					    $("#live_publish").css("display","none");
+					    $("#http_hls_out").css("display","block");
+					}else{
+					    if(jsonobj.syscontrol[0].display_log==2){
+					       $("#live_publish").css("display","none");
+					    }else{
+					       $("#live_publish").css("display","block");
+					    }
+					  
+					    $("#http_hls_out").css("display","none");
+					}
+				}
+			})
+		}
+
+		// 监听通道的select选中事件
+		function getStatus() {
+			selectNumber = $('#selectChannel').val() - 1;
+			sessionStorage.setItem('currentSelected',selectNumber);
+
+			var info = sessionStorage.getItem('access');
+			$.ajax({
+			    type:"post",
+			      url:"/getConfig",
+			      data:info,
+			      success:function(data){
+			         jsonobj = data;
+			         var vencObj = jsonobj.encode[0].venc_param;
+			         var aencObj = jsonobj.encode[0].aenc_param;
+			         $("#audioEnable").val(vencObj[selectNumber].audioEnable);
+			         $("#venc_codec_video").val(vencObj[selectNumber].recordEnable);
+			         $("#aenc_bitrate").val(aencObj[selectNumber].aenc_bitrate);
+			         $("#aenc_input").val(aencObj[selectNumber].aenc_input);
+			         $("#analog_vol").val(aencObj[selectNumber].analog_vol);
+			         $("input[name='http_flv_uriTxt']").val(vencObj[selectNumber].http_flv_uri);
+			         $("input[name='rtsp_uriTxt']").val(vencObj[selectNumber].rtsp_uri);
+			         $("input[name='rtmp_publish_url']").val(vencObj[selectNumber].rtmp_publish_uri);
+			         $("input[name='live_publish_url']").val(vencObj[selectNumber].live_publish_url); 
+			         $("input[name='multicast_ip']").val(vencObj[selectNumber].multicast_ip);
+			         $("input[name='multicast_port']").val(vencObj[selectNumber].multicast_port);
+			         $("#http_flv_enableSle").val(vencObj[selectNumber].http_flv_enable);
+			         $("#rtsp_enableSle").val(vencObj[selectNumber].rtsp_enable);
+			         $("#rtmp_enableSle").val(vencObj[selectNumber].rtmp_enable);
+			         $("#multicast_enable").val(vencObj[selectNumber].multicast_enable);
+			         $("input[name='rtsp_password']").val(vencObj[selectNumber].rtsp_password);
+			         $("input[name='rtsp_username']").val(vencObj[selectNumber].rtsp_username);
+			         $("#live_enable").val(vencObj[selectNumber].live_enable);
+			         var hlsEnable  = jsonobj.encode[0].venc_param[selectNumber].http_hls_enable;
+			         if(hlsEnable == 1){
+			              $("#live_enable").val(hlsEnable);
+			           }else{
+			              $("#live_enable").val(vencObj[selectNumber].live_enable);
+			         }
+			         $("#http_hls_enable").val(vencObj[selectNumber].http_hls_enable);
+			          $("#live_enable").val(vencObj[selectNumber].live_enable);
+			          $("#http_hls_uri").val(vencObj[selectNumber].http_hls_uri);
+			         if(aencObj[selectNumber].aenc_code == 0){
+			            $("#aenc_code").val(0) ;
+			            }else if(aencObj[selectNumber].aenc_code == 1){
+			            $("#aenc_code").val(1) ;
+			            }else if(aencObj[selectNumber].aenc_code == 2){
+			            $("#aenc_code").val(2) ;
+			            }else if(aencObj[selectNumber].aenc_code == 3 ){
+			            $("#aenc_code").val(3) ;
+			            }else if(aencObj[selectNumber].aenc_code == 4 ){
+			            $("#aenc_code").val(4) ;
+			          }
+			          if(aencObj[selectNumber].aenc_samplerate == 0){
+			            $("#aenc_samplerate").val(0) ;
+			            }else if(aencObj[selectNumber].aenc_samplerate == 8000){
+			            $("#aenc_samplerate").val(8000) ;
+			            }else if(aencObj[selectNumber].aenc_samplerate == 16000){
+			            $("#aenc_samplerate").val(16000) ;
+			            }else if(aencObj[selectNumber].aenc_samplerate == 32000 ){
+			            $("#aenc_samplerate").val(32000) ;
+			            }else if(aencObj[selectNumber].aenc_samplerate == 44100){
+			            $("#aenc_samplerate").val(44100) ;
+			            }else if(aencObj[selectNumber].aenc_samplerate == 48000){
+			            $("#aenc_samplerate").val(48000) ;
+			            }else if(aencObj[selectNumber].aenc_samplerate == 96000){
+			            $("#aenc_samplerate").val(96000) ;
+			          }
+
+			      }
+			});
+		}
+
+		// rtsp地址复制按钮
+		function copyRtsp() {
+			var rtsp_url_txt = document.getElementById("rtsp_uriTxt");
+			rtsp_url_txt.select();  //选中对象
+			document.execCommand("copy");  //执行浏览器复制命令
+			alert("copy success!");
+		}
+
+		// 设置按钮事件
+		function setInput() {
+			var info = sessionStorage.getItem('access');
+			var audioEnable=Number($("#audioEnable").val());
+			jsonobj.encode[0].venc_param[selectNumber].audioEnable=audioEnable;
+
+			var venc_codec_video=Number($("#venc_codec_video").val());
+			jsonobj.encode[0].venc_param[selectNumber].recordEnable=venc_codec_video;
+
+			var aenc_bitrate=Number($("#aenc_bitrate").val());
+			jsonobj.encode[0].aenc_param[selectNumber].aenc_bitrate=aenc_bitrate;
+
+			var aenc_input = Number($("#aenc_input").val());
+			jsonobj.encode[0].aenc_param[selectNumber].aenc_input=aenc_input;
+
+			var analog_vol = Number($("#analog_vol").val());
+			jsonobj.encode[0].aenc_param[selectNumber].analog_vol=analog_vol;
+			
+			var http_flv_uri=$("input[name='http_flv_uriTxt']").val();
+			jsonobj.encode[0].venc_param[selectNumber].http_flv_uri=http_flv_uri;
+			  
+			var rtsp_uriTxt=$("input[name='rtsp_uriTxt']").val();
+			jsonobj.encode[0].venc_param[selectNumber].rtsp_uri=rtsp_uriTxt;
+			  
+			var rtmp_publish_uri=$("input[name='rtmp_publish_url']").val();
+			jsonobj.encode[0].venc_param[selectNumber].rtmp_publish_uri=rtmp_publish_uri;
+			  
+			var multicast_ip=$("input[name='multicast_ip']").val();
+			jsonobj.encode[0].venc_param[selectNumber].multicast_ip=multicast_ip;
+			  
+			var multicast_port=Number($("input[name='multicast_port']").val());
+			jsonobj.encode[0].venc_param[selectNumber].multicast_port=multicast_port;
+			  
+			var http_flv_enableSle=Number($("#http_flv_enableSle").val());
+			jsonobj.encode[0].venc_param[selectNumber].http_flv_enable=http_flv_enableSle;
+			  
+			var rtsp_enableSle=Number($("#rtsp_enableSle").val());
+			jsonobj.encode[0].venc_param[selectNumber].rtsp_enable=rtsp_enableSle;
+			  
+			var rtmp_enableSle= Number($("#rtmp_enableSle").val());
+			jsonobj.encode[0].venc_param[selectNumber].rtmp_enable=rtmp_enableSle;
+			  
+			var multicast_enable=Number($("#multicast_enable").val());
+			jsonobj.encode[0].venc_param[selectNumber].multicast_enable=multicast_enable;
+			  
+			var rtsp_password=$("input[name='rtsp_password']").val();
+			jsonobj.encode[0].venc_param[selectNumber].rtsp_password=rtsp_password;
+			  
+			var rtsp_username=$("input[name='rtsp_username']").val();
+			jsonobj.encode[0].venc_param[selectNumber].rtsp_username=rtsp_username;
+
+			var live_publish_url=$("#live_publish_url").val();
+			jsonobj.encode[0].venc_param[selectNumber].live_publish_url=live_publish_url;
+
+			var live_enable=Number($("#live_enable").val());
+			jsonobj.encode[0].venc_param[selectNumber].live_enable=live_enable;
+
+			var http_hls_enable = Number($("#http_hls_enable").val());
+			jsonobj.encode[0].venc_param[selectNumber].http_hls_enable = http_hls_enable;
+			
+
+			if($("#aenc_samplerate").val() == 0){
+			    jsonobj.encode[0].aenc_param[selectNumber].aenc_samplerate = 0;
+			}else if($("#aenc_samplerate").val() == 8000){
+			    jsonobj.encode[0].aenc_param[selectNumber].aenc_samplerate = 8000;
+			}else if($("#aenc_samplerate").val() == 16000){
+			    jsonobj.encode[0].aenc_param[selectNumber].aenc_samplerate = 16000;
+			}else if($("#aenc_samplerate").val() == 32000){
+			    jsonobj.encode[0].aenc_param[selectNumber].aenc_samplerate = 32000;
+			}else if($("#aenc_samplerate").val() == 44100){
+			    jsonobj.encode[0].aenc_param[selectNumber].aenc_samplerate = 44100;
+			}else if($("#aenc_samplerate").val() == 48000){
+			    jsonobj.encode[0].aenc_param[selectNumber].aenc_samplerate = 48000;
+			}else if($("#aenc_samplerate").val() == 96000){
+			    jsonobj.encode[0].aenc_param[selectNumber].aenc_samplerate = 96000;
+			}
+
+
+			if($("#aenc_code").val() == 0){
+			    jsonobj.encode[0].aenc_param[selectNumber].aenc_code = 0;
+			}else if($("#aenc_code").val() == 1){
+			    jsonobj.encode[0].aenc_param[selectNumber].aenc_code = 1;
+			}else if($("#aenc_code").val() == 2){
+			    jsonobj.encode[0].aenc_param[selectNumber].aenc_code = 2;
+			}else if($("#aenc_code").val() == 3){
+			    jsonobj.encode[0].aenc_param[selectNumber].aenc_code = 3;
+			}else if($("#aenc_code").val() == 4){
+			    jsonobj.encode[0].aenc_param[selectNumber].aenc_code = 4;
+			}
+
+			if($("#http_hls_enable").val() == '1'){
+			 
+			  var post = window.location.host;
+			  console.log(post);
+			  var live_val = "rtmp://127.0.0.1/hlsram/chn"+selectNumber;
+			  var hls_val = "http://" + post+"/hlsram/chn"+selectNumber+"/index.m3u8";
+			  jsonobj.encode[0].venc_param[selectNumber].live_enable = 1;
+			  jsonobj.encode[0].venc_param[selectNumber].live_publish_url = live_val;
+			  jsonobj.encode[0].venc_param[selectNumber].http_hls_uri = hls_val;
+			  // $("#http_hls_uri").val(hls_val);
+			  console.log(live_val);
+			  console.log(hls_val);
+			}else{
+			    if(jsonobj.syscontrol[0].hlsout_enable == 1){
+			  		jsonobj.encode[0].venc_param[selectNumber].live_enable = 0;
+			    }  
+			}
+
+			$.ajax({
+				type:"post",
+				url:"/setConfig",
+				data: info + JSON.stringify(jsonobj),
+				success:function(data){
+					if(data == 0){
+						$('#successfully').css("display","inline-block");
+						// 1秒后刷新页面
+						setTimeout(function(){
+							window.location.reload()
+						},1000);
+					}else{
+						alert("apply success!");
+					}
+				}
+			})
+		}
+
+		// rtmp1播放按钮
+		function rtmpPlay(){
+			// 显示遮罩
+			$('.mask').css('display','block');
+			var infor = sessionStorage.getItem('access');
+			$.ajax({
+				type:'post',
+				url:'/getConfig',
+				data:infor,
+				success:function(data){
+					jsonobjId = data;
+                    var logo = jsonobjId.syscontrol[0].display_log;
+					if(logo == 0){
+						getvideo();
+					}else if(logo == 1){
+						getvideo();
+					}else if(logo == 2){
+						jinhevideo();
+					}
+				}
+			})
+			
+		}
+		function getvideo(){
+			var rtmpUrl = $('#rtmp_publish_url').val()
+			var videoObj = {
+				container: '#player',
+				variable: 'player',
+				autoplay: false,
+				live: true,
+				video: rtmpUrl
+			}
+			player = new ckplayer(videoObj)
+		}
+
+		function jinhevideo(){
+			var rtmp_publish_uri = $("#rtmp_publish_uri").val();
+			var rtmp_jinhe = rtmp_publish_uri.replace("-center","");
+			console.log(rtmp_jinhe);
+			var videoObject = {
+				container: '#videoCla', //容器的ID或className
+				variable: 'player',//播放函数名称
+				autoplay:false,
+				live:true,
+				video: rtmp_jinhe
+			};
+			var player = new ckplayer(videoObject);
+		}
+		// rtmp2播放按钮
+		function videoplayTwo() {
+			// 显示遮罩
+			$('.mask').css('display','block');
+			var rtmpUrl = $('#live_publish_url').val()
+			var videoObj = {
+				container: '#player',
+				variable: 'player',
+				autoplay: false,
+				live: true,
+				video: rtmpUrl
+			}
+			player = new ckplayer(videoObj)
+		}
+
+		//hls播放按钮
+		function hlsPlay() {
+			// 显示遮罩
+			$('.mask').css('display','block');
+			var http_hls_uri = $("#http_hls_uri").val();
+
+			var ip = jsonobj.ipinfo[0].eth_net.ip;
+			var currentChannel = selectNumber + 1;
+			var videoUrl = 'http://' + ip + '/hlsram/chn' + currentChannel + '/index.m3u8';
+
+			var videoObj = {
+				container: '#player',
+				variable: 'player',
+				autoplay: false,
+				html5m3u8: true,
+				video: videoUrl
+			}
+			player = new ckplayer(videoObj)
+		}
+
+		// 关闭遮罩的按钮
+		function closePlayer() {
+			// 暂时视频
+			if(player){
+				player.videoPause()
+			}
+			// 关闭遮罩
+			$('.mask').css('display','none');
+
+		}
+
+		// 改变语言
+		function changeLan() {
+			var lan = $('#LanSle').val()
+
+			if(lan == "Chinese"){
+				window.location.href = "outputMain.html";
+			}else{
+				window.location.href = "outputMainE.html";
+			}
+		}
+
+	</script>
+</body>
+</html>

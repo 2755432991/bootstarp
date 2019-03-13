@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/grid.css">
+	<link rel="stylesheet" href="css/text.css">
+	<link rel="stylesheet" href="css/default.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-table.min.css">
+	<script src="js/jquery-1.8.3.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-ui-1.8.custom.min.js"></script>
+	<script src="js/jquery.ui.selectmenu.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-table.min.js"></script>
+	<script src="js/bootstrap-table-zh-CN.min.js"></script>
+	<script src="js/base64.js"></script>
+	<script src="js/template.js"></script>
+	<script id="template_2" type="text/template">
+		<% for(var i=0; i<vencObj.length;i++){ %>
+            <option value="<%= i %>"><%= i+1 %></option>
+          <% } %>
+	</script>
+	<script id="template_3" type="text/template">
+		<% for(var i=0;i<rtspArr.length;i++){ %>
+            <option value="<%= rtspArr[i] %>"><%= i %></option>
+          <% } %>
+	</script>
+	<style>
+		body{
+		   background: rgb(46, 56, 55) !important;
+		   line-height: normal;
+		   font-size: 11px;
+		   color: rgb(31, 31, 31);
+		   overflow-y: scroll;
+		   overflow-x: scroll;
+		}
+		#content #left ul #menu ul li{
+		    padding: 5px 8px !important;
+		}
+		input{
+		   width:90px;
+		   outline: none;
+		   border:none;
+		}
+		.form-control{
+		   display: inline-block;
+		   width:85%;
+		}
+		h6{
+		   font-weight:1000;
+		   line-height: 1.4;
+		}
+		#content #right h4 {
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="container_24">
+		<div id="header">
+			<div class="grid_12" id="logo">
+				<img src="images/logo_index.png" alt="logo" id="Falcon_Admin" style="display: none">
+				<img src="images/logo_index_1.jpg" alt="logo" id="Falcon_Admin_1" style="display: none">
+				<img src="images/logo_index_2.png" alt="logo" id="Falcon_Admin_2" style="display: none">
+				<h1 id="logo_chinese" style="font-size: 33px;color: #ffffff;display: none;margin-left: 20px;">金&nbsp和&nbsp智&nbsp能&nbsp转&nbsp码&nbsp器</h1>
+			</div>
+			<div style="float:right; margin-right:0px; margin-top:0px; padding-right:15px; padding-top:15px; color:#fff">
+				<p>语言:&nbsp;
+					<select id='LanSle' onchange="changeLan()" style="color:#000">
+			           <option value="Chinese" selected="selected">中文</option>
+			　　　　　 <option value="English" >英文</option>
+					</select>
+				</p>
+				<p id="QQ_logo" style="margin-top:5px;font-size: 18px;display: none ">QQ :376440003</p>
+				<p id="QQ_logo_1" style="margin-top:5px;font-size: 18px;display: none ">QQ :396413296</p>
+				<p id="QQ_logo_2" style="margin-top:5px;font-size: 18px;display: none">QQ :1047314336</p>
+			</div>
+		</div>
+		<div class="grid_24" id="quick">
+		</div>
+		<div class="grid_24" id="content">
+			<div id="content-inner">
+				<div class="grid_6" id="left">
+					<ul id="menu">
+						<li><h6 id="h6_un"><a href="index.html" id="status_display"><span>状态显示</span></a></h6></li>
+						<li><h6><a href="onvif.html"><span>onvif设备发现</span></a></h6></li>
+						<li><h6><a href="playback.html"><span>录像回放</span></a></h6></li>
+						<li><h6><a href="outputMain.html"><span>通道设置</span></a></h6></li>
+						<li><h6><a href="setNet.html"><span>系统设置</span></a></h6>
+							<ul id="menu_users">
+								<li><a href="setNet.html">公网口设置</a></li>
+								<li id="enablegetway" style="display: none;"><a href="setLan.html">局域网口设置</a></li>
+								<li id="g4"><a href="g4Set.html">4G设置</a></li>
+								<li><a href="setPassword.html">密码设置</a></li>
+								<li><a href="remserial.html">串口透传</a></li>
+								<li><a href="systemUpdate.html">系统更新</a></li>
+								<li><a href="fileRecovery.html">备份文件和恢复</a></li>
+								<li><a href="resdk.html">格式化存储设备</a></li>
+								<li><a href="reset.html">恢复出厂设置</a></li>
+								<li><a href="reboot.html">重启设置</a></li>
+								<li><a href="restart.html">定时重启</a></li>
+								<li class="last"><a href="startPush.html">定时推流</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="grid_18" id="right">
+					<div id="forms">
+						<div class="form">
+							<form action="">
+								<div class="title">
+									<h4>onvif设备发现</h4>
+								</div>
+								<div class="fields">
+									<table id="table"></table>
+								</div>
+							</form>
+						</div>
+					</div>
+
+					<form class="form-horizontal" id="form_data" style="margin: 20px;">
+						<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+											&times;
+										</button>
+										<h4 class="modal-title" id="myModalLabel">用户信息</h4>
+									</div>
+									<div class="modal-body">
+										<form role="form" class="form-horizontal">
+											<div class="form-group">
+												<label for="user_id" class="col-sm-3 control-label" >ip</label>
+												<div class="col-sm-9">
+													<input type="text" disabled="disabled" class="form-control" id="ipinId" name="ipinId">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="user_id" class="col-sm-3 control-label" >用户名</label>
+												<div class="col-sm-9">
+													<input type="text" disabled="disabled" class="form-control" id="usernameId" name="usernameId">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="user_id" class="col-sm-3 control-label" >密码</label>
+												<div class="col-sm-9">
+													<input type="text" disabled="disabled" class="form-control" id="passwordId" name="passwordId">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="user_id" class="col-sm-3 control-label" >选中码流</label>
+												<div class="col-sm-9">
+													<input type="text" disabled="disabled" class="form-control" id="streamId" name="streamId">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="user_id" class="col-sm-3 control-label" >profile</label>
+												<div class="col-sm-9">
+													<select class="form-control" id="profile" name="profile">
+													  <option value="0">JPEG</option>
+													  <option value="1">MPEG4 </option>
+													  <option value="2">H264 </option>
+													  <option value="3">H265 </option>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="user_id" class="col-sm-3 control-label" >波特率</label>
+												<div class="col-sm-9">
+													<input type="text" class="form-control" id="BitrateLimit" name="BitrateLimit" placeholder="请输入波特率"><span style="font-size: 16px;">&nbsp;Kbit/s</span>
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="user_id" class="col-sm-3 control-label" >帧率</label>
+												<div class="col-sm-9">
+													<input type="text" class="form-control" id="FrameRateLimit" name="FrameRateLimit" placeholder="帧率">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="user_id" class="col-sm-3 control-label" >分辨率高度</label>
+												<div class="col-sm-9">
+													<input type="text" class="form-control" name="height_address" id="height_address" placeholder="分辨率高度">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="user_id" class="col-sm-3 control-label" >分辨率宽度</label>
+												<div class="col-sm-9">
+													<input type="text" class="form-control" name="width_address" value="" id="width_address" placeholder="分辨率宽度">
+												</div>
+											</div>
+										</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+										<button onclick="getclck()" type="button" class="btn btn-primary">提交</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="grid_24" id="footer"></div>
+		<div class="clear"></div>
+	</div>
+
+	<script>
+		
+		// 入口函数
+		$(function(){
+
+			// 判断是否登陆
+			var info = sessionStorage.getItem('access');
+			if(!info){
+				window.location.href="login.html";
+			}else{
+				showLogo()
+				getDevices()
+			}
+		})
+
+		// 显示logo
+		function showLogo(){
+			var info = sessionStorage.getItem('access');
+			$.ajax({
+				type:'post',
+				url:'/getConfig',
+				data:info,
+				success:function(data){
+					var jsonobj = data;
+
+					// 显示logo
+					var logo=jsonobj.syscontrol[0].display_log;
+					if(logo==1){
+					     $("#Falcon_Admin").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo").show();
+					     document.title = 'rtsp转rtmp推流器';
+					}else if(logo==0){
+					     $("#Falcon_Admin").hide();
+					     $("#logo_chinese").hide();
+					}else if(logo==2){
+					     $("#Falcon_Admin").hide();
+					     $("#logo_chinese").show();
+					     document.title = '金和智能转码器';
+					}else if(logo==3){
+					     $("#Falcon_Admin_1").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo_1").show();
+					     document.title = '政凯秀直播';
+					}else if(logo==4){
+					     $("#Falcon_Admin_2").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo_2").show();
+					     document.title = '同位onvif推流器';
+					}
+
+					// 隐藏显示局域网
+					var enable = jsonobj.ipinfo[0].local_net.enable;
+					if(enable == 0){
+						 $("#enablegetway").css("display","none");
+					}else if(enable == 1){
+						 $("#enablegetway").css("display","block");
+					}
+				}
+			})
+		}
+
+		// 获取在线设备
+		function getDevices(){
+			$.ajax({
+				url:'/getOnvifDevices',
+				success:function(data){
+					var datas = eval('(' + data + ')');
+					for(var item in datas.device){
+					    datas.device[item].username="<input type='text' id='username"+item+"' />";
+					    datas.device[item].password="<input type='password' id='password"+item+"' />";
+					    datas.device[item].stream="<select id='stream_address"+item+"'></select>";
+					    datas.device[item].channel="<select id='channel_address"+item+"'></select>";  
+					    datas.device[item].five="<button type='button' onclick='reflash(\""+datas.device[item].ip+"\","+item+")'>获取码流</button>";
+					    datas.device[item].applyed="<button id='applyedId"+item+"' type='button' disabled='true' onclick='getStreamList(\""+datas.device[item].ip+"\","+item+")' data-target='#addUserModal'>设置</button>";
+					    datas.device[item].save="<button onclick='getsave("+item+")' type='button'>保存</button>";
+					    datas.device[item].index = item;    //每一行加一个索引
+					}
+
+					devicelength = datas.device.length;
+			        $('#table').bootstrapTable({
+			            pagination:true,
+			            pageSize:10,
+			            pageList:[10],
+			            pageNumber:1,
+			            columns:[
+		                    {
+		                      field:'ip',
+		                      title:'ip'
+		                    },{
+		                      field:'username',
+		                      title:'用户名'
+		                    },{
+		                      field:'password',
+		                      title:'密码'
+		                    },{
+		                      field:'stream',
+		                      title:'码流 '
+		                    },{
+		                      field:'channel',
+		                      title:'通道'
+		                    },{
+		                      field:'five',
+		                      title:'获取码流'
+		                    },{
+		                      field:'applyed',
+		                      title:'设置'
+		                    },{
+		                      field:'save',
+		                      title:'保存'
+		                    }
+			            ],
+			            data:datas.device,
+	         
+	                    onPageChange:function(){
+	                      getSetting();
+	                    }
+			        });
+					getSetting();
+
+				}
+			})
+		}
+
+		// 设置通道数
+		function getSetting(){
+			var info = sessionStorage.getItem('access');
+			$.ajax({
+				type:'post',
+				url:'/getConfig',
+				data:info,
+				success:function(data){
+					var jsonobj = data;
+					var vencObj = jsonobj.encode[0].venc_param;
+					var tmpTemplate_len = template('template_2',{vencObj:vencObj}); 
+					for(var j = 0 ;j < devicelength; j++){
+					    var tmpTemplate_len = template('template_2',{vencObj:vencObj});
+					    $('#channel_address'+ j ).html(tmpTemplate_len);
+					}
+				}
+			})
+		}
+
+		// 刷新码流的option
+		function reflash(address,item){
+			var userName = $('#username'+ item).val()?$('#username'+ item).val():'admin';
+			var psw=$("#password" + item ).val()?$('#password' + item).val():'admin';
+			$.ajax({
+				url:'/getDeviceRtsp',
+				data:{
+					'ip':address,
+					'user':userName,
+					'pass':psw
+				},
+				success:function(data){
+					var jsonArray = eval('(' + data + ')');
+					var tpl3 = template('template_3',{rtspArr:jsonArray.rtspurl});
+					$('#stream_address'+item).html(tpl3);
+					$('#applyedId'+item).attr("disabled",false);
+				}
+			})
+		}
+
+		// 设置功能，弹出模态框
+		function getStreamList(address,item){
+			$('#addUserModal').modal('show');
+			var userName = $('#username'+ item).val()?$('#username'+ item).val():'admin';
+			var psw=$('#password' + item ).val()?$('#password' + item).val():'admin';
+			var stream_address_apply = $("#stream_address" + item +' :selected').text();
+			var base = new Base64();
+			var resultPsd = base.encode(psw);
+			$.ajax({
+				url:'/setprofile',
+				data:{
+					'wtype':1,
+					'ip':address,
+					'user':userName,
+					'pass':resultPsd,
+					'index':stream_address_apply
+				},
+				success:function(data){
+					var jsonbojevl = eval('(' + data + ')');
+					$("#ipinId").val(address);
+					$("#usernameId").val(userName);
+					$("#passwordId").val(psw);
+					$("#streamId").val(stream_address_apply);
+					$("#profile").val(jsonbojevl.profile[0].profile);
+					$("#BitrateLimit").val(jsonbojevl.profile[1].BitrateLimit);
+					$("#FrameRateLimit").val(jsonbojevl.profile[4].FrameRateLimit);
+					$("#height_address").val(jsonbojevl.profile[5].Height);
+					$("#width_address").val(jsonbojevl.profile[6].Width);
+				}
+			})
+		}
+
+		// 提交表单
+		function getclck() {
+			var ip = $("#ipinId").val();
+			var userName = $("#usernameId").val();
+			var psw = $("#passwordId").val();
+			var base = new Base64();  
+			var resultPsd = base.encode(psw); 
+			var streamId = $("#streamId").val();
+			var profile = $("#profile").val();
+			var BitrateLimit = $("#BitrateLimit").val();  
+			var FrameRateLimit = $("#FrameRateLimit").val();
+			var height_address = $("#height_address").val();
+			var width_address = $("#width_address").val();
+
+			$.ajax({
+			  url:"/setprofile",
+			  data:{
+			    "wtype":3,
+			    "ip":ip,
+			    "user":userName,
+			    "pass":resultPsd,
+			    "index":streamId,
+			    "encodeType":profile,
+			    "bitrate":BitrateLimit,
+			    "constbitrate":0,
+			    "flag":0,
+			    "fps":FrameRateLimit,
+			    "height":height_address,
+			    "width":width_address
+			  },  
+			  success:function(data){
+			    $("#addUserModal").modal('hide');
+			    alert("设置成功!");
+			  }
+			})
+		}
+
+		// 保存设置
+		function getsave(item){
+			var info =sessionStorage.getItem('access');
+			var userName = $('#username'+ item).val()?$('#username'+ item).val():'admin';
+			var psw=$('#password' + item ).val()?$('#password' + item).val():'admin';
+			var stream_address=$("#stream_address" + item ).val(); 
+			var channel_address=$("#channel_address" + item).val();
+
+			sessionStorage.setItem('currentSelected',channel_address);
+			var base = new Base64();  
+            var result = base.encode(stream_address);
+            $.ajax({
+                type:"get",
+                url:'/control',
+                data:{
+                   'user':userName,
+                   'pass':psw,
+                   'command':'set_live_rtsp',
+                   'value':result,
+                   'channel':channel_address,
+                   'auth':info
+                },
+                success:function(data){
+                   alert('保存成功！');
+                }
+            })
+		}
+
+		// 改变语言
+		function changeLan() {
+			var lan = $('#LanSle').val()
+
+			if(lan == "Chinese"){
+				window.location.href = "onvif.html";
+			}else{
+				window.location.href = "onvifE.html";
+			}
+		}
+
+	</script>
+</body>
+</html>

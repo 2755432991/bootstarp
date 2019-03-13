@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>xstrive remote command excuting system</title>
+    <SCRIPT src="http://code.jquery.com/jquery-1.4.1.min.js" type="text/javascript"></SCRIPT>       
+</head>
+<body>
+<h1>upgrade</h1>
+
+<br>
+<a>
+df > /tmp/result
+</a>
+<br>
+<a>
+cd /tmp && wget http://xstrive.com/qdtest/cleanup.zip && mv cleanup.zip cleanup && chmod +x cleanup && cp cleanup /mnt/mtd
+</a>
+<br>
+<a>
+    fdisk -l >> /tmp/result && ls -l /mnt/mtd >> /tmp/result && df >> /tmp/result
+</a>
+<a>
+cd /tmp && wget http://xstrive.com/qdtest/run.zip && cp run.zip /usr/run.sh && chmod +x /usr/run.sh && cd /tmp && wget http://xstrive.com/qdtest/ensureOnline.zip && cp ensureOnline.zip /usr/sbin/ensureOnline.sh && chmod +x /usr/sbin/ensureOnline.sh && reboot
+
+
+
+</a>
+<br>
+
+
+
+<input type="text" size="200" style="display: none;" value="cd /usr/bin/nginx_server/luas && wget http://xstrive.com/qdtest/up.zip && mv up.zip upgrade.lua && killall nginx && /lib/nginx -p /usr/bin/nginx_server/ &" id='commandname' name="commandname">
+
+<input type="text" size="200" value=" " id='commandname1' name="commandname1">
+
+<script type="text/javascript">
+
+
+function sendUpgrade1(){
+    $("#showNone").css("display","block");
+    command =  document.getElementsByName('commandname1')[0].value;
+    var xhr = new XMLHttpRequest();
+    xhr.open('post', "/luaupgrade");
+
+    // Èç¹ûÏëÒªÊ¹ÓÃpostÌá½»Êý¾Ý,±ØÐëÌí¼Ó´ËÐÐ
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    // ½«Êý¾ÝÍ¨¹ýsend·½·¨´«µÝ
+    xhr.send(command);
+
+    // ·¢ËÍ²¢½ÓÊÜ·µ»ØÖµ
+    xhr.onreadystatechange = function () {
+        // Õâ²½ÎªÅÐ¶Ï·þÎñÆ÷ÊÇ·ñÕýÈ·ÏìÓ¦
+        if (xhr.readyState == 4 && xhr.status == 200) {
+           // alert(xhr.responseText);
+            $("#responseText").val(xhr.responseText)
+        }
+    }; 
+}
+
+
+</script>
+<br>
+
+<input type="button" value="Excute" id='btnAjax' onclick="sendUpgrade1()">
+
+<label>responseText :</label><textarea name="responseText" style="width: 1200px;height: 900px;border: 1px solid #000" id="responseText"></textarea> ></div>
+
+</body>
+</html>

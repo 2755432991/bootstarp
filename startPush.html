@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/grid.css">
+	<link rel="stylesheet" href="css/text.css">
+	<link rel="stylesheet" href="css/default.css">
+	<script src="js/jquery-1.4.2.min.js"></script>
+	<script src="js/jquery-ui-1.8.custom.min.js"></script>
+	<script src="js/jquery.ui.selectmenu.js"></script>
+	<script src="js/falcon.js"></script>
+	<script src="js/moment.js"></script>
+</head>
+<body>
+	<div class="container_24">
+		<div id="header">
+			<div class="grid_12" id="logo">
+				<img src="images/logo_index.png" alt="logo" id="Falcon_Admin" style="display: none">
+				<img src="images/logo_index_1.jpg" alt="logo" id="Falcon_Admin_1" style="display: none">
+				<img src="images/logo_index_2.png" alt="logo" id="Falcon_Admin_2" style="display: none">
+				<h1 id="logo_chinese" style="font-size: 33px;color: #ffffff;display: none;margin-left: 20px;">金&nbsp和&nbsp智&nbsp能&nbsp转&nbsp码&nbsp器</h1>
+			</div>
+			<div style="float:right; margin-right:0px; margin-top:0px; padding-right:15px; padding-top:15px; color:rgb(255,255,255)">
+				<p>语言:&nbsp;
+					<select id='LanSle' onchange="changeLan()" >
+			           <option value="Chinese" selected="selected">中文</option>
+			　　　　　 <option value="English" >英文</option>
+					</select>
+				</p>
+				<p id="QQ_logo" style="margin-top:5px;font-size: 18px;display: none ">QQ :376440003</p>
+				<p id="QQ_logo_1" style="margin-top:5px;font-size: 18px;display: none ">QQ :396413296</p>
+				<p id="QQ_logo_2" style="margin-top:5px;font-size: 18px;display: none">QQ :1047314336</p>
+			</div>
+		</div>
+		<div class="grid_24" id="quick">
+		</div>
+		<div class="grid_24" id="content">
+			<div id="content-inner">
+				<div class="grid_6" id="left">
+					<ul id="menu">
+						<li><h6 id="h6_un"><a href="index.html" id="status_display"><span>状态显示</span></a></h6></li>
+						<li><h6><a href="onvif.html"><span>onvif设备发现</span></a></h6></li>
+						<li><h6><a href="playback.html"><span>录像回放</span></a></h6></li>
+						<li><h6><a href="outputMain.html"><span>通道设置</span></a></h6></li>
+						<li><h6><a href="setNet.html"><span>系统设置</span></a></h6>
+							<ul id="menu_users">
+								<li><a href="setNet.html">公网口设置</a></li>
+								<li id="enablegetway" style="display: none;"><a href="setLan.html">局域网口设置</a></li>
+								<li id="g4"><a href="g4Set.html">4G设置</a></li>
+								<li><a href="setPassword.html">密码设置</a></li>
+								<li><a href="remserial.html">串口透传</a></li>
+								<li><a href="systemUpdate.html">系统更新</a></li>
+								<li><a href="fileRecovery.html">备份文件和恢复</a></li>
+								<li><a href="resdk.html">格式化存储设备</a></li>
+								<li><a href="reset.html">恢复出厂设置</a></li>
+								<li><a href="reboot.html">重启设置</a></li>
+								<li><a href="restart.html">定时重启</a></li>
+								<li class="last"><a href="startPush.html">定时推流</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="grid_18" id="right">
+					<div id="forms">
+						<form action="" method="post">
+							<div class="form">
+								<div class="title">
+									<h4>定时推流</h4>
+								</div>
+								<div class="fields">
+									<div class="field">
+										<div class="label">
+											<label>时段一</label>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>定时推流：</label>
+										</div>
+										<div class="select">
+											<select name="timer_push_enable_one" id="timer_push_enable_one">
+												<option value="0">关闭</option>
+												<option value="1">开启</option>
+											</select>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>定时开启时间：</label>
+										</div>
+										<div class="select">
+											<select id="start_push_one">
+											    <option value="0">0</option>
+											    <option value="1">1</option>
+											    <option value="2">2</option>
+											    <option value="3">3</option>
+											    <option value="4">4</option>
+											    <option value="5">5</option>
+											    <option value="6">6</option>
+											    <option value="7">7</option>
+											    <option value="8">8</option>
+											    <option value="9">9</option>
+											    <option value="10">10</option>
+											    <option value="11">11</option>
+											    <option value="12">12</option>
+											    <option value="13">13</option>
+											    <option value="14">14</option>
+											    <option value="15">15</option>
+											    <option value="16">16</option>
+											    <option value="17">17</option>
+											    <option value="18">18</option>
+											    <option value="19">19</option>
+											    <option value="20">20</option>
+											    <option value="21">21</option>
+											    <option value="22">22</option>
+											    <option value="23">23</option>
+											</select> 时
+											<select id="start_min_one">
+											    <option value="0">00</option>
+											    <option value="10">10</option>
+											    <option value="20">20</option>
+											    <option value="30">30</option>
+											    <option value="40">40</option>
+											    <option value="50">50</option>
+											</select> 分钟
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>定时关闭时间：</label>
+										</div>
+										<div class="select">
+											<select id="end_close_one">
+											    <option value="0">0</option>
+											    <option value="1">1</option>
+											    <option value="2">2</option>
+											    <option value="3">3</option>
+											    <option value="4">4</option>
+											    <option value="5">5</option>
+											    <option value="6">6</option>
+											    <option value="7">7</option>
+											    <option value="8">8</option>
+											    <option value="9">9</option>
+											    <option value="10">10</option>
+											    <option value="11">11</option>
+											    <option value="12">12</option>
+											    <option value="13">13</option>
+											    <option value="14">14</option>
+											    <option value="15">15</option>
+											    <option value="16">16</option>
+											    <option value="17">17</option>
+											    <option value="18">18</option>
+											    <option value="19">19</option>
+											    <option value="20">20</option>
+											    <option value="21">21</option>
+											    <option value="22">22</option>
+											    <option value="23">23</option>
+											</select> 时
+											<select id="end_min_one">
+											     <option value="0">00</option>
+											     <option value="10">10</option>
+											     <option value="20">20</option>
+											     <option value="30">30</option>
+											     <option value="40">40</option>
+											     <option value="50">50</option>
+											</select> 分钟
+										</div>
+									</div>
+
+									<div class="field">
+										<div class="label">
+											<label>时段二</label>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>定时推流：</label>
+										</div>
+										<div class="select">
+											<select name="timer_push_enable_two" id="timer_push_enable_two">
+												<option value="0">关闭</option>
+												<option value="1">开启</option>
+											</select>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>定时开启时间：</label>
+										</div>
+										<div class="select">
+											<select id="start_push_two">
+											    <option value="0">0</option>
+											    <option value="1">1</option>
+											    <option value="2">2</option>
+											    <option value="3">3</option>
+											    <option value="4">4</option>
+											    <option value="5">5</option>
+											    <option value="6">6</option>
+											    <option value="7">7</option>
+											    <option value="8">8</option>
+											    <option value="9">9</option>
+											    <option value="10">10</option>
+											    <option value="11">11</option>
+											    <option value="12">12</option>
+											    <option value="13">13</option>
+											    <option value="14">14</option>
+											    <option value="15">15</option>
+											    <option value="16">16</option>
+											    <option value="17">17</option>
+											    <option value="18">18</option>
+											    <option value="19">19</option>
+											    <option value="20">20</option>
+											    <option value="21">21</option>
+											    <option value="22">22</option>
+											    <option value="23">23</option>
+											</select> 时
+											<select id="start_min_two">
+											    <option value="0">00</option>
+											    <option value="10">10</option>
+											    <option value="20">20</option>
+											    <option value="30">30</option>
+											    <option value="40">40</option>
+											    <option value="50">50</option>
+											</select> 分钟
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>定时关闭时间：</label>
+										</div>
+										<div class="select">
+											<select id="end_close_two">
+											    <option value="0">0</option>
+											    <option value="1">1</option>
+											    <option value="2">2</option>
+											    <option value="3">3</option>
+											    <option value="4">4</option>
+											    <option value="5">5</option>
+											    <option value="6">6</option>
+											    <option value="7">7</option>
+											    <option value="8">8</option>
+											    <option value="9">9</option>
+											    <option value="10">10</option>
+											    <option value="11">11</option>
+											    <option value="12">12</option>
+											    <option value="13">13</option>
+											    <option value="14">14</option>
+											    <option value="15">15</option>
+											    <option value="16">16</option>
+											    <option value="17">17</option>
+											    <option value="18">18</option>
+											    <option value="19">19</option>
+											    <option value="20">20</option>
+											    <option value="21">21</option>
+											    <option value="22">22</option>
+											    <option value="23">23</option>
+											</select> 时
+											<select id="end_min_two">
+											     <option value="0">00</option>
+											     <option value="10">10</option>
+											     <option value="20">20</option>
+											     <option value="30">30</option>
+											     <option value="40">40</option>
+											     <option value="50">50</option>
+											</select> 分钟
+										</div>
+									</div>
+
+									<div class="field">
+										<div class="label">
+											<label>时段三</label>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>定时推流：</label>
+										</div>
+										<div class="select">
+											<select name="timer_push_enable_three" id="timer_push_enable_three">
+												<option value="0">关闭</option>
+												<option value="1">开启</option>
+											</select>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>定时开启时间：</label>
+										</div>
+										<div class="select">
+											<select id="start_push_three">
+											    <option value="0">0</option>
+											    <option value="1">1</option>
+											    <option value="2">2</option>
+											    <option value="3">3</option>
+											    <option value="4">4</option>
+											    <option value="5">5</option>
+											    <option value="6">6</option>
+											    <option value="7">7</option>
+											    <option value="8">8</option>
+											    <option value="9">9</option>
+											    <option value="10">10</option>
+											    <option value="11">11</option>
+											    <option value="12">12</option>
+											    <option value="13">13</option>
+											    <option value="14">14</option>
+											    <option value="15">15</option>
+											    <option value="16">16</option>
+											    <option value="17">17</option>
+											    <option value="18">18</option>
+											    <option value="19">19</option>
+											    <option value="20">20</option>
+											    <option value="21">21</option>
+											    <option value="22">22</option>
+											    <option value="23">23</option>
+											</select> 时
+											<select id="start_min_three">
+											    <option value="0">00</option>
+											    <option value="10">10</option>
+											    <option value="20">20</option>
+											    <option value="30">30</option>
+											    <option value="40">40</option>
+											    <option value="50">50</option>
+											</select> 分钟
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>定时关闭时间：</label>
+										</div>
+										<div class="select">
+											<select id="end_close_three">
+											    <option value="0">0</option>
+											    <option value="1">1</option>
+											    <option value="2">2</option>
+											    <option value="3">3</option>
+											    <option value="4">4</option>
+											    <option value="5">5</option>
+											    <option value="6">6</option>
+											    <option value="7">7</option>
+											    <option value="8">8</option>
+											    <option value="9">9</option>
+											    <option value="10">10</option>
+											    <option value="11">11</option>
+											    <option value="12">12</option>
+											    <option value="13">13</option>
+											    <option value="14">14</option>
+											    <option value="15">15</option>
+											    <option value="16">16</option>
+											    <option value="17">17</option>
+											    <option value="18">18</option>
+											    <option value="19">19</option>
+											    <option value="20">20</option>
+											    <option value="21">21</option>
+											    <option value="22">22</option>
+											    <option value="23">23</option>
+											</select> 时
+											<select id="end_min_three">
+											     <option value="0">00</option>
+											     <option value="10">10</option>
+											     <option value="20">20</option>
+											     <option value="30">30</option>
+											     <option value="40">40</option>
+											     <option value="50">50</option>
+											</select> 分钟
+										</div>
+									</div>
+
+									<div class="buttons">
+										<input type="button"  value="设置"  onClick="setResetTime()" style="margin-left: 48px;" />
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid_24" id="footer"></div>
+		<div class="clear"></div>
+	</div>
+	<script>
+
+		var jsonobj = {};
+		
+		// 入口函数
+		$(function(){
+			// 判读是否登陆
+			var info = sessionStorage.getItem('access');
+			if(!info){
+				window.location.href = "login.html"
+			}else{
+				getInfo()
+			}
+		})
+
+		// 获取页面信息
+		function getInfo() {
+			var info = sessionStorage.getItem('access');
+			$.ajax({
+				type:"post",
+				url:"/getConfig",
+				data:info,
+				success:function(data){
+					jsonobj = data;
+
+					// 显示logo
+					var logo=jsonobj.syscontrol[0].display_log;
+					if(logo==1){
+					     $("#Falcon_Admin").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo").show();
+					     document.title = 'rtsp转rtmp推流器';
+					}else if(logo==0){
+					     $("#Falcon_Admin").hide();
+					     $("#logo_chinese").hide();
+					}else if(logo==2){
+					     $("#Falcon_Admin").hide();
+					     $("#logo_chinese").show();
+					     document.title = '金和智能转码器';
+					}else if(logo==3){
+					     $("#Falcon_Admin_1").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo_1").show();
+					     document.title = '政凯秀直播';
+					}else if(logo==4){
+					     $("#Falcon_Admin_2").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo_2").show();
+					     document.title = '同位onvif推流器';
+					}
+
+					// 隐藏显示局域网
+					var enable = jsonobj.ipinfo[0].local_net.enable;
+					if(enable == 0){
+						 $("#enablegetway").css("display","none");
+					}else if(enable == 1){
+						 $("#enablegetway").css("display","block");
+					}
+
+					// 赋值到页面上
+					$("#timer_push_enable_one").val(jsonobj.syscontrol[0].timer_control[0].timer_push_enable);
+					var numtime =Number(jsonobj.syscontrol[0].timer_control[0].start_push_min);
+					var numendtime = Number(jsonobj.syscontrol[0].timer_control[0].end_push_min);
+					var total = moment('2018-1-1').minute(numtime);
+					var endnum = moment('2018-1-1').minute(numendtime);
+					$("#start_push_one").val(total.hour());
+					$("#start_min_one").val(total.minute());
+					$("#end_close_one").val(endnum.hour());
+					$("#end_min_one").val(endnum.minute());
+
+					$("#timer_push_enable_two").val(jsonobj.syscontrol[0].timer_control[1].timer_push_enable);
+					var numtime1 =Number(jsonobj.syscontrol[0].timer_control[1].start_push_min);
+					var numendtime1 = Number(jsonobj.syscontrol[0].timer_control[1].end_push_min);
+					var total1 = moment('2018-1-1').minute(numtime1);
+					var endnum1 = moment('2018-1-1').minute(numendtime1);
+					$("#start_push_two").val(total1.hour());
+					$("#start_min_two").val(total1.minute());
+					
+					$("#end_close_two").val(endnum1.hour());
+					$("#end_min_two").val(endnum1.minute());
+					
+
+					$("#timer_push_enable_three").val(jsonobj.syscontrol[0].timer_control[2].timer_push_enable);
+					var numtime2 =Number(jsonobj.syscontrol[0].timer_control[2].start_push_min);
+					var numendtime2 = Number(jsonobj.syscontrol[0].timer_control[2].end_push_min);
+					var total2 = moment('2018-1-1').minute(numtime2);
+					var endnum2 = moment('2018-1-1').minute(numendtime2);
+					$("#start_push_three").val(total2.hour());
+					$("#start_min_three").val(total2.minute());
+					$("#end_close_three").val(endnum2.hour());
+					$("#end_min_three").val(endnum2.minute());
+
+				}
+			})
+		}
+
+		// 设置按钮
+		function setResetTime() {
+			var info = sessionStorage.getItem('access');
+
+			var timer_push_enable_one = Number($("#timer_push_enable_one").val());
+			jsonobj.syscontrol[0].timer_control[0].timer_push_enable=timer_push_enable_one;
+
+			var start_push_min_one=Number($("#start_push_one").val()*60)+ Number($("#start_min_one").val());
+			jsonobj.syscontrol[0].timer_control[0].start_push_min=start_push_min_one;
+
+			var end_close_min_one=Number($("#end_close_one").val()*60)+ Number($("#end_min_one").val());
+			jsonobj.syscontrol[0].timer_control[0].end_push_min=end_close_min_one;
+
+
+			var timer_push_enable_two= Number($("#timer_push_enable_two").val());
+			jsonobj.syscontrol[0].timer_control[1].timer_push_enable=timer_push_enable_two;
+
+			var start_push_min_two=Number($("#start_push_two").val()*60)+ Number($("#start_min_two").val());
+			jsonobj.syscontrol[0].timer_control[1].start_push_min=start_push_min_two;
+
+			var end_close_min_two=Number($("#end_close_two").val()*60)+ Number($("#end_min_two").val());
+			jsonobj.syscontrol[0].timer_control[1].end_push_min=end_close_min_two;
+
+
+			var timer_push_enable_three= Number($("#timer_push_enable_three").val());
+			jsonobj.syscontrol[0].timer_control[2].timer_push_enable=timer_push_enable_three;
+
+			var start_push_min_three=Number($("#start_push_three").val()*60)+ Number($("#start_min_three").val());
+			jsonobj.syscontrol[0].timer_control[2].start_push_min=start_push_min_three;
+
+			var end_close_min_three=Number($("#end_close_three").val()*60)+ Number($("#end_min_three").val());
+			jsonobj.syscontrol[0].timer_control[2].end_push_min=end_close_min_three;
+
+			$.ajax({
+				type: 'post',
+				url: '/setConfig',
+				data: info + JSON.stringify(jsonobj),
+				success:function(data){
+					if(data == 0){
+					    alert("设置成功！")
+					} else{
+					    alert('设置失败！')
+					}
+				}
+			})
+			
+		}
+
+		// 改变语言
+		function changeLan() {
+			var lan = $('#LanSle').val()
+
+			if(lan == "Chinese"){
+				window.location.href = "startPush.html";
+			}else{
+				window.location.href = "startPushE.html";
+			}
+		}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/grid.css">
+	<link rel="stylesheet" href="css/text.css">
+	<link rel="stylesheet" href="css/default.css">
+	<script src="js/jquery-1.4.2.min.js"></script>
+	<script src="js/jquery-ui-1.8.custom.min.js"></script>
+	<script src="js/jquery.ui.selectmenu.js"></script>
+	<script src="js/md5.js"></script>
+	<style>
+		#content{
+			background: #FFFFFF !important;
+		}
+		#content{
+			 margin: 80px auto 0px !important;
+		}
+		#content #right {
+	    	padding: 35px 140px 10px !important;
+		}
+		#subBut3_btn {
+			display: block;
+			margin-top: 10px;
+			margin-left: 205px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container_24">
+		<div id="header">
+			<div class="grid_12" id="logo">
+				<img src="images/logo_index.png" alt="logo" id="Falcon_Admin" style="display: none">
+				<img src="images/logo_index_1.jpg" alt="logo" id="Falcon_Admin_1" style="display: none">
+				<img src="images/logo_index_2.png" alt="logo" id="Falcon_Admin_2" style="display: none">
+				<h1 id="logo_chinese" style="font-size: 33px;color: #ffffff;display: none;margin-left: 20px;">金&nbsp和&nbsp智&nbsp能&nbsp转&nbsp码&nbsp器</h1>
+			</div>
+			<div style="float:right; margin-right:0px; margin-top:0px; padding-right:15px; padding-top:15px; color:rgb(255,255,255)">
+				<p>language:&nbsp;
+					<select id='LanSle' onChange="changeLan()" >
+			           <option value="Chinese" >Chinese</option>
+			　　　　　 <option value="English" selected="selected">English</option>
+					</select>
+				</p>
+				<p id="QQ_logo" style="margin-top:5px;font-size: 18px;display: none ">QQ :376440003</p>
+				<p id="QQ_logo_1" style="margin-top:5px;font-size: 18px;display: none ">QQ :396413296</p>
+				<p id="QQ_logo_2" style="margin-top:5px;font-size: 18px;display: none">QQ :1047314336</p>
+			</div>
+		</div>
+		<div class="grid_24" id="quick">
+		</div>
+		<div class="grid_24" id="content">
+			<div id="content-inner"></div>
+			<div class="grid_18" id="right">
+				<div id="form">
+					<form action="" method="post">
+						<div class="form">
+							<div class="title">
+								<h4>Please login to your account</h4>
+							</div>
+							<div class="fields">
+								<div class="field">
+									<div class="label">
+										<label>Username:</label>
+									</div>
+									<div class="input">
+										<input type="text" name="username" id="username" maxlength="64" autofocus="autofocus" />
+									</div>
+								</div>
+								<div class="field">
+									<div class="label">
+										<label>Password:</label>
+									</div>
+									<div class="input">
+										<input type="password" name="user_password" maxlength="64" id="user_password" />
+									</div>
+								</div>
+							</div>
+							<div class="buttons">
+								<input type="button" value="login" class="but" id="subBut3_btn" onclick="changeBtn()" />
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="grid_24" id="footer"></div>
+		<div class="clear"></div>
+	</div>
+	<script>
+		
+
+		// 监听键盘的enter按键
+		document.onkeydown = function(event){
+			var e = event || window.event;
+			if( e && e.keyCode == 13){
+				changeBtn();
+			}
+		}
+
+		// 监听登录按钮点击事件
+		function changeBtn(){
+			var username=$("#username").val();
+			var user_password=$("#user_password").val();
+			var userpass = username + user_password;
+			var hash = hex_md5(userpass);
+			console.log(hash);
+			$.ajax({
+				type:"post",
+				url:"/getAuth",
+				data:hash,
+				success:function(data){
+					if (data == 0) {
+						sessionStorage.setItem('access',hash);
+						window.location.href="indexE.html";
+					}else{
+						alert("username or password error,please check again！");
+					}
+				}
+			})
+		}
+
+		// 改变语言
+		function changeLan() {
+			var lan = $('#LanSle').val()
+
+			if(lan == "Chinese"){
+				window.location.href = "login.html";
+			}else{
+				window.location.href = "loginE.html";
+			}
+		}
+
+	</script>
+</body>
+</html>

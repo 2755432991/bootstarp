@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/grid.css">
+	<link rel="stylesheet" href="css/text.css">
+	<link rel="stylesheet" href="css/default.css">
+	<script src="js/jquery-1.4.2.min.js"></script>
+	<script src="js/jquery-ui-1.8.custom.min.js"></script>
+	<script src="js/jquery.ui.selectmenu.js"></script>
+	<script src="js/falcon.js"></script>
+</head>
+<body>
+	<div class="container_24">
+		<div id="header">
+			<div class="grid_12" id="logo">
+				<img src="images/logo_index.png" alt="logo" id="Falcon_Admin" style="display: none">
+				<img src="images/logo_index_1.jpg" alt="logo" id="Falcon_Admin_1" style="display: none">
+				<img src="images/logo_index_2.png" alt="logo" id="Falcon_Admin_2" style="display: none">
+				<h1 id="logo_chinese" style="font-size: 33px;color: #ffffff;display: none;margin-left: 20px;">金&nbsp和&nbsp智&nbsp能&nbsp转&nbsp码&nbsp器</h1>
+			</div>
+			<div style="float:right; margin-right:0px; margin-top:0px; padding-right:15px; padding-top:15px; color:rgb(255,255,255)">
+				<p>language:&nbsp;
+					<select id='LanSle' onChange="changeLan()" >
+			           <option value="Chinese" >Chinese</option>
+			　　　　　 <option value="English" selected="selected">English</option>
+					</select>
+				</p>
+				<p id="QQ_logo" style="margin-top:5px;font-size: 18px;display: none ">QQ :376440003</p>
+				<p id="QQ_logo_1" style="margin-top:5px;font-size: 18px;display: none ">QQ :396413296</p>
+				<p id="QQ_logo_2" style="margin-top:5px;font-size: 18px;display: none">QQ :1047314336</p>
+			</div>
+		</div>
+		<div class="grid_24" id="quick">
+		</div>
+		<div class="grid_24" id="content">
+			<div id="content-inner">
+				<div class="grid_6" id="left">
+					<ul id="menu">
+						<li><h6 id="h6_un"><a href="indexE.html" id="status_display"><span>Status display</span></a></h6></li>
+						<li><h6><a href="onvifE.html"><span>Onvif device discovery</span></a></h6></li>
+						<li><h6><a href="playbackE.html"><span>Video playback</span></a></h6></li>
+						<li><h6><a href="outputMainE.html"><span>Stream setting</span></a></h6></li>
+						<li><h6><a href="setNetE.html"><span>System settings</span></a></h6>
+							<ul id="menu_users">
+								<li><a href="setNetE.html">Network setting</a></li>
+								<li id="enablegetway" style="display: none;"><a href="setLanE.html">Lan setting</a></li>
+								<li id="g4"><a href="g4SetE.html">4G settings</a></li>
+								<li><a href="setPasswordE.html">Password setting</a></li>
+								<li><a href="remserialE.html">Serial port passthrough</a></li>
+								<li><a href="systemUpdateE.html">System update</a></li>
+								<li><a href="fileRecoveryE.html">Backup files and restore</a></li>
+								<li><a href="resdkE.html">Format the storage device</a></li>
+								<li><a href="resetE.html">Factory data reset</a></li>
+								<li><a href="rebootE.html">Restart the device</a></li>
+								<li><a href="restartE.html">Time for restart</a></li>
+								<li class="last"><a href="startPushE.html">Regularly push</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="grid_18" id="right">
+					<div id="forms">
+						<form action="" method="post">
+							<div class="form">
+								<div class="title">
+									<h4>Serial port passthrough</h4>
+								</div>
+								<div class="fields">
+									<div class="field">
+										<div class="label">
+											<label>Mode</label>
+										</div>
+										<div class="select">
+											<select id="tcp_client_mode" name="tcp_client_mode">
+												<option value="0">Passthrough closed</option>
+												<option value="1">tcp client</option> 
+												<option value="2">tcp server</option> 
+												<option value="3">udp client</option> 
+												<option value="4">udp server</option>
+											</select>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>IP passthrough:</label>
+										</div>
+										<div class="input">
+											<input name="server_ip" type="text" value=""  maxlength="32" id="server_ip" />
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Pass-through port:</label>
+										</div>
+										<div class="input">
+											<input name="port" type="text" value=""  maxlength="32" id="port" />
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Baud rate:</label>
+										</div>
+										<div class="input">
+											<input name="serial_baundrate" type="text" value=""  maxlength="32" id="serial_baundrate" />
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Data bits:</label>
+										</div>
+										<div class="input">
+											<input name="databits" type="text" value=""  maxlength="32" id="databits" />
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Stop bits:</label>
+										</div>
+										<div class="input">
+											<input name="stopbits" type="text" value=""  maxlength="32" id="stopbits">
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Parity check:</label>
+										</div>
+										<div class="input">
+											<input name="parity" type="text" value=""  maxlength="32" id="parity">
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Flow control:</label>
+										</div>
+										<div class="input">
+											<input name="flow_control_enable" type="text" value=""  maxlength="32" id="flow_control_enable">
+										</div>
+									</div>
+									<div class="buttons">
+										<input type="button" name="button" value="apply" id="button" onclick="setAdv()" />
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid_24" id="footer"></div>
+		<div class="clear"></div>
+	</div>
+	<script>
+		
+		// 入口函数
+		$(function(){
+			// 判读是否登陆
+			var info = sessionStorage.getItem('access');
+			if(!info){
+				window.location.href = "loginE.html"
+			}else{
+				getInfo()
+			}
+		})
+
+		// 获取页面信息
+		function getInfo() {
+			var info = sessionStorage.getItem('access');
+			$.ajax({
+				type:"post",
+				url:"/getConfig",
+				data:info,
+				success:function(data){
+					jsonobj = data;
+
+					// 显示logo
+					var logo=jsonobj.syscontrol[0].display_log;
+					if(logo==1){
+					     $("#Falcon_Admin").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo").show();
+					     document.title = 'rtsp转rtmp推流器';
+					}else if(logo==0){
+					     $("#Falcon_Admin").hide();
+					     $("#logo_chinese").hide();
+					}else if(logo==2){
+					     $("#Falcon_Admin").hide();
+					     $("#logo_chinese").show();
+					     document.title = '金和智能转码器';
+					}else if(logo==3){
+					     $("#Falcon_Admin_1").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo_1").show();
+					     document.title = '政凯秀直播';
+					}else if(logo==4){
+					     $("#Falcon_Admin_2").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo_2").show();
+					     document.title = '同位onvif推流器';
+					}
+
+					// 隐藏显示局域网
+					var enable = jsonobj.ipinfo[0].local_net.enable;
+					if(enable == 0){
+						 $("#enablegetway").css("display","none");
+					}else if(enable == 1){
+						 $("#enablegetway").css("display","block");
+					}
+
+					// 赋值到页面上
+					$("input[name='server_ip']").val(jsonobj.transerial[0].server_ip);
+					$("#tcp_client_mode").val(jsonobj.transerial[0].tcp_client_mode);
+					$("input[name='port']").val(jsonobj.transerial[0].port);
+					$("input[name='serial_baundrate']").val(jsonobj.transerial[0].serial_baundrate);  
+					$("input[name='databits']").val(jsonobj.transerial[0].databits);
+					$("input[name='stopbits']").val(jsonobj.transerial[0].stopbits);
+					$("input[name='parity']").val(jsonobj.transerial[0].parity);
+					$("input[name='flow_control_enable']").val(jsonobj.transerial[0].flow_control_enable);
+
+				}
+			})
+		}
+
+		// 设置按钮
+		function setAdv() {
+
+			var info = sessionStorage.getItem('access');
+
+			var server_ip = $("input[name='server_ip']").val();
+			jsonobj.transerial[0].server_ip=server_ip;
+			
+			var tcp_client_mode=Number($("#tcp_client_mode").val());
+			jsonobj.transerial[0].tcp_client_mode=tcp_client_mode;
+			
+			var port=Number($("input[name='port']").val());
+			jsonobj.transerial[0].port=port;
+			
+			var serial_baundrate=Number($("input[name='serial_baundrate']").val());  
+			jsonobj.transerial[0].serial_baundrate=serial_baundrate;
+			
+			var databits=Number($("input[name='databits']").val());
+			jsonobj.transerial[0].databits=databits;
+			
+			var stopbits=Number($("input[name='stopbits']").val());
+			jsonobj.transerial[0].stopbits = stopbits;
+			
+			var parity= Number($("input[name='parity']").val());
+			jsonobj.transerial[0].parity = parity;
+			
+			var flow_control_enable=Number($("input[name='flow_control_enable']").val());
+			jsonobj.transerial[0].flow_control_enable=flow_control_enable;
+
+
+			$.ajax({
+				type:"post",
+				url: "/setConfig",
+				data:info + JSON.stringify(jsonobj),
+				success:function(data){
+					if (data == 0) {
+					    alert("setting success!")
+					}else{
+					    alert("setting failed!")
+					}
+				}
+			})
+		}
+
+		// 改变语言
+		function changeLan() {
+			var lan = $('#LanSle').val()
+
+			if(lan == "Chinese"){
+				window.location.href = "remserial.html";
+			}else{
+				window.location.href = "remserialE.html";
+			}
+		}
+
+	</script>
+</body>
+</html>

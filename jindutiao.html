@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>升级中</title>
+	<style>
+		body{
+			position: relative;
+		    height: 100vh;
+		}
+		body .one{
+			display: inline-block;
+			position:absolute;
+			width: 600px;
+			height:300px;
+			left:50%;
+			top:50%;
+			margin-left:-200px;
+			margin-top:-200px;
+		}
+		body .progressBar{
+			width:200px;
+			height:16px;
+			border:1px solid #98AFB7;
+			border-radius:5px;
+			margin-top:10px;
+			position:absolute;
+			left:50%;
+			top:50%;
+			margin-left:-100px;
+			margin-top:-8px;
+		}
+		#bar {
+			width:0px;
+			height:16px;
+			border-radius:5px;
+			background:#5EC4EA;
+			text-align: center;
+		}
+	</style>
+	<script src="js/jquery-1.4.2.min.js"></script>
+</head>
+<body>
+	<div class="one">
+		<h3>正在升级设备，大概需要两分钟，请不要关闭设备电源哦!</h3>
+		<h3>升级成功后，请使用设备搜索工具搜索设备IP。</h3>
+	</div>
+	<div class="progressBar">
+		<div id="bar">
+			<span id="ProgressDialog" style="display: none; font-size: 12px;line-height: 16px;">升级成功后自动跳转至首页！</span>
+		</div>
+	</div>
+	<script>
+		
+		// 入口函数
+		$(function(){
+			$("#bar").css("width","0px");
+
+			var speed = 400;
+			var bar = setInterval(function(){
+				var nowWidth = parseInt($('#bar').width());
+
+				if(nowWidth <= 200){
+					var barWidth = (nowWidth + 1) + 'px';
+					$('#bar').css('width',barWidth);
+				}else{
+					clearInterval(bar);
+					$('#ProgressDialog').show()
+
+					setTimeout("window.location.href = 'index.html'",5000);
+				}
+			},speed)
+		})
+
+	</script>
+</body>
+</html>

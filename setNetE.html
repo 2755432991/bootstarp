@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/grid.css">
+	<link rel="stylesheet" href="css/text.css">
+	<link rel="stylesheet" href="css/default.css">
+	<script src="js/jquery-1.4.2.min.js"></script>
+	<script src="js/jquery-ui-1.8.custom.min.js"></script>
+	<script src="js/jquery.ui.selectmenu.js"></script>
+	<script src="js/falcon.js"></script>
+</head>
+<body>
+	<div class="container_24">
+		<div id="header">
+			<div class="grid_12" id="logo">
+				<img src="images/logo_index.png" alt="logo" id="Falcon_Admin" style="display: none">
+				<img src="images/logo_index_1.jpg" alt="logo" id="Falcon_Admin_1" style="display: none">
+				<img src="images/logo_index_2.png" alt="logo" id="Falcon_Admin_2" style="display: none">
+				<h1 id="logo_chinese" style="font-size: 33px;color: #ffffff;display: none;margin-left: 20px;">金&nbsp和&nbsp智&nbsp能&nbsp转&nbsp码&nbsp器</h1>
+			</div>
+			<div style="float:right; margin-right:0px; margin-top:0px; padding-right:15px; padding-top:15px; color:rgb(255,255,255)">
+				<p>language:&nbsp;
+					<select id='LanSle' onChange="changeLan()" >
+			           <option value="Chinese" >Chinese</option>
+			　　　　　 <option value="English" selected="selected">English</option>
+					</select>
+				</p>
+				<p id="QQ_logo" style="margin-top:5px;font-size: 18px;display: none ">QQ :376440003</p>
+				<p id="QQ_logo_1" style="margin-top:5px;font-size: 18px;display: none ">QQ :396413296</p>
+				<p id="QQ_logo_2" style="margin-top:5px;font-size: 18px;display: none">QQ :1047314336</p>
+			</div>
+		</div>
+		<div class="grid_24" id="quick">
+		</div>
+		<div class="grid_24" id="content">
+			<div id="content-inner">
+				<div class="grid_6" id="left">
+					<ul id="menu">
+						<li><h6 id="h6_un"><a href="indexE.html" id="status_display"><span>Status display</span></a></h6></li>
+						<li><h6><a href="onvifE.html"><span>Onvif device discovery</span></a></h6></li>
+						<li><h6><a href="playbackE.html"><span>Video playback</span></a></h6></li>
+						<li><h6><a href="outputMainE.html"><span>Stream setting</span></a></h6></li>
+						<li><h6><a href="setNetE.html"><span>System settings</span></a></h6>
+							<ul id="menu_users">
+								<li><a href="setNetE.html">Network setting</a></li>
+								<li id="enablegetway" style="display: none;"><a href="setLanE.html">Lan setting</a></li>
+								<li id="g4"><a href="g4SetE.html">4G settings</a></li>
+								<li><a href="setPasswordE.html">Password setting</a></li>
+								<li><a href="remserialE.html">Serial port passthrough</a></li>
+								<li><a href="systemUpdateE.html">System update</a></li>
+								<li><a href="fileRecoveryE.html">Backup files and restore</a></li>
+								<li><a href="resdkE.html">Format the storage device</a></li>
+								<li><a href="resetE.html">Factory data reset</a></li>
+								<li><a href="rebootE.html">Restart the device</a></li>
+								<li><a href="restartE.html">Time for restart</a></li>
+								<li class="last"><a href="startPushE.html">Regularly push</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="grid_18" id="right">
+					<div id="forms">
+						<form action="" method="post">
+							<div class="form">
+								<div class="title">
+									<h4>Network Settings </h4>
+								</div>
+								<div class="fields">
+									<div class="field">
+										<div class="label">
+											<label>DHCP：</label>
+										</div>
+										<div class="select">
+											<select id="dhcp_enable" name="dhcp_enable">
+												<option  value="1" selected ="selected">enable</option> 
+												<option  value="0" >disable</option>
+											</select>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>IP：</label>
+										</div>
+										<div class="input">
+											<input type="text" id="ipTxt" name="ipTxt" maxlength="18" />
+											<span>&nbsp;default：192.168.0.15</span>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Subnet mask:</label>
+										</div>
+										<div class="input">
+											<input type="text" id="netmaskTxt" name="netmaskTxt" maxlength="18" />
+											<span>&nbsp;default：255.255.255.0</span>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Default gateway:</label>
+										</div>
+										<div class="input">
+											<input type="text" id="gatewayTxt" name="gatewayTxt" maxlength="18" />
+											<span>&nbsp;default：192.168.0.1</span>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>MAC address:</label>
+										</div>
+										<div class="input">
+											<input type="text" id="macTxt" name="macTxt" maxlength="20" />
+										</div>
+									</div>
+								</div>
+								<br>
+								<div class="title">
+									<h4>DNS Settings</h4>
+								</div>	
+								<div class="fields">
+									<div class="field">
+										<div class="label">
+											<label>DNS1：</label>
+										</div>
+										<div class="input">
+											<input id="dns0Txt" name="dns0Txt"  maxlength="18"  type ="text"/>
+											<span>&nbsp;default：114.114.114.114</span>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>DNS2：</label>
+										</div>
+										<div class="input">
+											<input id="dns1Txt" name="dns1Txt"  maxlength="18"  type ="text"/>
+											<span>&nbsp;default：114.114.114.114</span>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>Tips:</label>
+										</div>
+										<p>Network Settings need to be rebooted to work!</p>
+									</div>
+									<div class="buttons">
+										<input type="button" name="button" value="apply" id="button" onClick="setIp()" />
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid_24" id="footer"></div>
+		<div class="clear"></div>
+	</div>
+
+	<script>
+		
+		var jsonobj = {};
+
+		// 入口函数
+		$(function(){
+			// 判读是否登陆
+			var info = sessionStorage.getItem('access');
+			if(!info){
+				window.location.href = "loginE.html"
+			}else{
+				getInfo()
+				getIp()
+				getGateway()
+				getMask()
+				getDns1()
+				getDns2()
+			}
+		})
+
+		// 获取信息
+		function getInfo() {
+			var info = sessionStorage.getItem('access');
+			$.ajax({
+				type:"post",
+				url:"/getConfig",
+				data:info,
+				success:function(data){
+					jsonobj = data;
+
+					// 显示logo
+					var logo=jsonobj.syscontrol[0].display_log;
+					if(logo==1){
+					     $("#Falcon_Admin").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo").show();
+					     document.title = 'rtsp转rtmp推流器';
+					}else if(logo==0){
+					     $("#Falcon_Admin").hide();
+					     $("#logo_chinese").hide();
+					}else if(logo==2){
+					     $("#Falcon_Admin").hide();
+					     $("#logo_chinese").show();
+					     document.title = '金和智能转码器';
+					}else if(logo==3){
+					     $("#Falcon_Admin_1").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo_1").show();
+					     document.title = '政凯秀直播';
+					}else if(logo==4){
+					     $("#Falcon_Admin_2").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo_2").show();
+					     document.title = '同位onvif推流器';
+					}
+
+					// 隐藏显示局域网
+					var enable = jsonobj.ipinfo[0].local_net.enable;
+					if(enable == 0){
+						 $("#enablegetway").css("display","none");
+					}else if(enable == 1){
+						 $("#enablegetway").css("display","block");
+					}
+
+					$("input[name='macTxt']").val(jsonobj.ipinfo[0].eth_net.mac);
+					$("#dhcp_enable").val(jsonobj.ipinfo[0].eth_net.dhcp_enable);
+				}
+			})
+		}
+
+		// 获取ip
+		function getIp() {
+			$.ajax({
+			    type:'get',
+			    url:'/jsonfile/ip',
+			    success:function(data){
+			       $("input[name='ipTxt']").val(data);
+			    }
+			})
+		}
+
+		// 获取网关
+		function getGateway() {
+			$.ajax({
+			    type:'get',
+			    url:'/jsonfile/gateway',
+			    success:function(data){
+			       $("input[name='gatewayTxt']").val(data);
+			    }
+			})
+		}
+
+		// 获取掩码
+		function getMask() {
+			$.ajax({
+			    type:'get',
+			    url:'/jsonfile/mask',
+			    success:function(data){
+			       $("input[name='netmaskTxt']").val(data);
+			    }
+			})
+		}
+
+		// 获取dns1
+		function getDns1() {
+			$.ajax({
+			    type:'get',
+			    url:'/jsonfile/dns1',
+			    success:function(data){
+			       $("#dns0Txt").val(data);
+			    }
+			})
+		}
+
+		// 获取dns2
+		function getDns2() {
+			$.ajax({
+			    type:'get',
+			    url:'/jsonfile/dns2',
+			    success:function(data){
+			       $("#dns1Txt").val(data);
+			    }
+			})
+		}
+
+
+		// 设置按钮
+		function setIp() {
+			console.log(jsonobj)
+			var info = sessionStorage.getItem('access');
+			// dhcp
+			var dhcp_enable=Number($("#dhcp_enable").val());
+			jsonobj.ipinfo[0].eth_net.dhcp_enable=dhcp_enable;
+			// ip
+			var ip=$("input[name='ipTxt']").val();
+			jsonobj.ipinfo[0].eth_net.ip = ip;
+			//子网掩码
+			var netmaskTxt=$("input[name='netmaskTxt']").val();
+			jsonobj.ipinfo[0].eth_net.netmask= netmaskTxt;
+			//默认网关
+			var gatewayTxt=$("input[name='gatewayTxt']").val();
+			jsonobj.ipinfo[0].eth_net.gateway=gatewayTxt;
+			// mac
+			var macTxt=$("input[name='macTxt']").val();
+			jsonobj.ipinfo[0].eth_net.mac=macTxt;
+			// dns1
+			var dns1=$("input[name='dns0Txt']").val();
+			jsonobj.ipinfo[0].eth_net.dns0=dns1;
+			// dns2
+			var dns2=$("input[name='dns1Txt']").val();
+			jsonobj.ipinfo[0].eth_net.dns1=dns2;
+			console.log(jsonobj)
+			$.ajax({
+				type:"post",
+				url: "/setConfig",
+				data: info + JSON.stringify(jsonobj),
+				success:function(data){
+					if(data == 0){
+						alert("apply success!");
+					}else{
+						alert("apply failed!");
+					}
+				}
+			})
+		}
+
+		// 改变语言
+		function changeLan() {
+			var lan = $('#LanSle').val()
+
+			if(lan == "Chinese"){
+				window.location.href = "setNet.html";
+			}else{
+				window.location.href = "setNetE.html";
+			}
+		}
+
+	</script>
+</body>
+</html>

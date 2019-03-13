@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/grid.css">
+	<link rel="stylesheet" href="css/text.css">
+	<link rel="stylesheet" href="css/default.css">
+	<script src="js/jquery-1.4.2.min.js"></script>
+	<script src="js/jquery-ui-1.8.custom.min.js"></script>
+	<script src="js/jquery.ui.selectmenu.js"></script>
+	<script src="js/falcon.js"></script>
+	<script src="js/template.js"></script>
+
+	<script id="template_id" type="text/template">
+		<% for(var i = 0;i<vec.length;i++){ %>
+        	<li><%= i+1 %></li>
+     	<% } %>
+	</script>
+	<script id="template_id_1" type="text/template"> 
+	    <% for(var i = 0;i<rtmp_1.length;i++){ %>
+	        <li>
+	            <div class="one" ></div>
+	        </li>
+	    <% } %>
+	</script>
+	<script id="template_id_2" type="text/template"> 
+	    <% for(var i = 0;i<rtmp_2.length;i++){ %>
+	        <li>
+	            <div class="one_rtmp"></div>
+	        </li>
+	    <% } %>
+	</script>
+	<script id="template_id_3" type="text/template"> 
+	    <% for(var i = 0;i<rtsp_1.length;i++){ %>
+	        <li>
+	            <div class="rtsp_one" ></div>
+	        </li>
+	    <% } %>
+	</script>
+	<script id="template_id_4" type="text/template"> 
+	    <% for(var i = 0;i<udp_1.length;i++){ %>
+	        <li>
+	            <div class="udp" ></div>
+	        </li>
+	    <% } %>
+	</script>
+
+	<style>
+		#menu_ul_li li{
+		  list-style:none;
+		  padding:0;
+		  margin:0;
+		  float:left;
+		  width:35px;
+		}
+		#menu_ul_li_1 li{
+		  list-style:none;
+		  padding:0;
+		  margin:0;
+		  float:left;
+		  width:35px;
+		}
+		#menu_ul_li_1 li .one{
+		  width:10px;
+		  height:10px;
+		  background-color : green;
+		  border-radius: 50%;
+		}
+
+		#menu_ulli_rtmp li{
+		  list-style:none;
+		  padding:0;
+		  margin:0;
+		  float:left;
+		  width:35px;
+		 }
+		#menu_ulli_rtmp li .one_rtmp{
+		  width:10px;
+		  height:10px;
+		  background-color : green;
+		  border-radius: 50%;
+		}
+		#menu_ulli_rtsp li{
+		  list-style:none;
+		  padding:0;
+		  margin:0;
+		  float:left;
+		  width:35px;
+		}
+		#menu_ulli_rtsp li .rtsp_one{
+		  width:10px;
+		  height:10px;
+		  background-color : green;
+		  border-radius: 50%;
+		}
+		#menu_udp li{
+		  list-style:none;
+		  padding:0;
+		  margin:0;
+		  float:left;
+		  width:35px;
+		}
+		#menu_udp li .udp{
+		  width:10px;
+		  height:10px;
+		  background-color : green;
+		  border-radius: 50%;
+		}
+	</style>
+</head>
+<body>
+	<div class="container_24">
+		<div id="header">
+			<div class="grid_12" id="logo">
+				<img src="images/logo_index.png" alt="logo" id="Falcon_Admin" style="display: none">
+				<img src="images/logo_index_1.jpg" alt="logo" id="Falcon_Admin_1" style="display: none">
+				<img src="images/logo_index_2.png" alt="logo" id="Falcon_Admin_2" style="display: none">
+				<h1 id="logo_chinese" style="font-size: 33px;color: #ffffff;display: none;margin-left: 20px;">金&nbsp和&nbsp智&nbsp能&nbsp转&nbsp码&nbsp器</h1>
+			</div>
+			<div style="float:right; margin-right:0px; margin-top:0px; padding-right:15px; padding-top:15px; color:rgb(255,255,255)">
+				<p>语言:&nbsp;
+					<select id='LanSle' onchange="changeLan()" >
+			           <option value="Chinese" selected="selected">中文</option>
+			　　　　　 <option value="English" >英文</option>
+					</select>
+				</p>
+				<p id="QQ_logo" style="margin-top:5px;font-size: 18px;display: none ">QQ :376440003</p>
+				<p id="QQ_logo_1" style="margin-top:5px;font-size: 18px;display: none ">QQ :396413296</p>
+				<p id="QQ_logo_2" style="margin-top:5px;font-size: 18px;display: none">QQ :1047314336</p>
+			</div>
+		</div>
+		<div class="grid_24" id="quick">
+		</div>
+		<div class="grid_24" id="content">
+			<div id="content-inner">
+				<div class="grid_6" id="left">
+					<ul id="menu">
+						<li><h6 id="h6_un"><a href="index.html" id="status_display"><span>状态显示</span></a></h6></li>
+						<li><h6><a href="onvif.html"><span>onvif设备发现</span></a></h6></li>
+						<li><h6><a href="playback.html"><span>录像回放</span></a></h6></li>
+						<li><h6><a href="outputMain.html"><span>通道设置</span></a></h6></li>
+						<li><h6><a href="setNet.html"><span>系统设置</span></a></h6>
+							<ul id="menu_users">
+								<li><a href="setNet.html">公网口设置</a></li>
+								<li id="enablegetway" style="display: none;"><a href="setLan.html">局域网口设置</a></li>
+								<li id="g4"><a href="g4Set.html">4G设置</a></li>
+								<li><a href="setPassword.html">密码设置</a></li>
+								<li><a href="remserial.html">串口透传</a></li>
+								<li><a href="systemUpdate.html">系统更新</a></li>
+								<li><a href="fileRecovery.html">备份文件和恢复</a></li>
+								<li><a href="resdk.html">格式化存储设备</a></li>
+								<li><a href="reset.html">恢复出厂设置</a></li>
+								<li><a href="reboot.html">重启设置</a></li>
+								<li><a href="restart.html">定时重启</a></li>
+								<li class="last"><a href="startPush.html">定时推流</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="grid_18" id="right">
+					<div id="forms">
+						<form action="" method="post">
+							<div class="form">
+								<div class="title">
+									<h4>系统状态</h4>
+								</div>
+								<div class="fields">
+									<div class="field">
+										<div class="label">
+											<label>设备序列号：</label>
+										</div>
+										<div class="label">
+											<input type="text" name="serial" id="serial" size="40" readonly="true" />
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>软件版本号：</label>
+										</div>
+										<div class="label">
+											<input type="text" name="soft_version" id="soft_version" size="40" readonly="true" />
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>公网状态：</label>
+										</div>
+										<div class="label">
+											<span id="throughput"></span>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>rtsp流量带宽：</label>
+										</div>
+										<div class="label">
+											<input type="text" name="rtsp_bw" id="rtsp_bw" size="40" readonly="true" />
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>rtmp流量带宽：</label>
+										</div>
+										<div class="label">
+											<input type="text" name="rtmp_bw" id="rtmp_bw" size="40" readonly="true" />
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>运行时间：</label>
+										</div>
+										<div class="label">
+											<input type="text" name="total_runtime_count" id="total_runtime_count" size="40" />
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>CPU占用率：</label>
+										</div>
+										<div class="label">
+											<input type="text" name="cpu_usage" id="cpu_usage" size="40" />
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>内存占用率：</label>
+										</div>
+										<div class="label">
+											<input type="text" name="mem_usage" id="mem_usage" size="40" readonly="true" />
+										</div>
+									</div>
+									<div class="field" style="display: none;">
+										<div class="label">
+											<label>输入音频采样率：</label>
+										</div>
+										<div class="label">
+											<input type="text" name="venc_gopTxt" id="venc_gopTxt" size="40" readonly="true" />
+										</div>
+									</div>
+									<div class="field">
+										<div class="label_dtp" style="display: inline-block; width:100px">
+											<label>通道：</label>
+										</div>
+										<div class="label_cpu_1">
+											<ul id="menu_ul_li" style="width:580px;height:30px;margin: 0px 36px 0px 75px !important;"></ul>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label_dtp" style="display: inline-block; width:100px">
+											<label>RTMP状态：</label>
+										</div>
+										<div class="label_cpu_2">
+											<ul id="menu_ul_li_1" style="width:580px;height:30px;margin: 0px 36px 0px 75px !important;"></ul>
+										</div>
+									</div>
+									<div class="field rtmp2_field">
+										<div class="label_dtp_rtmp" style="display: inline-block; width:100px">
+											<label>RTMP状态2：</label>
+										</div>
+										<div class="label_cpu_rtmp">
+											<ul id="menu_ulli_rtmp" style="width:580px;height:30px;margin: 0px 36px 0px 75px !important;"></ul>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label_dtp" style="display: inline-block; width:100px">
+											<label>RTSP状态：</label>
+										</div>
+										<div class="label_cpu_3">
+											<ul id="menu_ulli_rtsp" style="width:580px;height:30px;margin: 0px 36px 0px 75px !important;"></ul>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label_dtp" style="display: inline-block; width:100px">
+											<label>udp状态：</label>
+										</div>
+										<div class="label_cpu_3">
+											<ul id="menu_udp" style="width:580px;height:30px;margin: 0px 36px 0px 75px !important;"></ul>
+										</div>
+									</div>
+									<div class="field">
+										<div class="label" style="width:100px">
+											<label>温馨提示：</label>
+										</div>
+										<p>绿色代表视频流正常，红色代表出错，黄色代表未配置的哦！</p>
+									</div>
+								</div>
+								<div id="lan_dhcp_Enable">
+									<br>
+									<div class="title">
+										<h4>DHCP禁用情况下设备ip</h4>
+									</div>
+								</div>
+								<div class="fields">
+									<div class="field">
+										<div class="label">
+											<label>IP：</label>
+										</div>
+										<div class="label_cpu" id="ip">
+											<input type="text" id="ipTxt" name="ipTxt" maxlength="18" />
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>子网掩码：</label>
+										</div>
+										<div class="label_cpu" id="mask">
+											<input type="text" id="netmaskTxt" name="netmaskTxt" maxlength="18" />
+										</div>
+									</div>
+									<div class="field">
+										<div class="label">
+											<label>网关：</label>
+										</div>
+										<div class="label_cpu" id="route">
+											<input type="text" id="gatewayTxt" name="gatewayTxt" maxlength="18" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid_24" id="footer"></div>
+		<div class="clear"></div>
+	</div>
+	<script>
+		
+		// 入口函数
+		$(function(){
+
+			// 判断是否登陆
+			var info = sessionStorage.getItem('access')
+			if(!info){
+				window.location.href = "login.html"
+			}else{
+				getListMessage()
+				judgeNetwork()
+				rtspBw()
+				rtmpBw()
+				getCpu()
+				getMem()
+				getRtmp()
+				getRtmp2()
+				getRtsp()
+				getUdp()
+			}
+			
+		})
+
+		// 判断公网地址是否正常
+		function judgeNetwork(){
+			// 发送请求
+			$.ajax({
+				type:"get",
+				url:"/jsonfile/ntpok",
+				success:function(data){
+					$("#throughput").html("公网地址正常！");
+				},
+				error:function(){
+					$("#throughput").html("公网地址不正常！");
+				}
+			})
+		}
+
+		// 获取系统状态的信息
+		function getListMessage(){
+			var info = sessionStorage.getItem('access');
+			$.ajax({
+				type:"post",
+				url:"/getConfig",
+				data:info,
+				success:function(data){
+					var jsonobj = data;
+					$("#serial").val(jsonobj.syscontrol[0].serial);
+					$("#total_runtime_count").val(jsonobj.syscontrol[0].total_runtime_count);
+					$("#venc_gopTxt").val(jsonobj.encode[0].aenc_param[0].aenc_samplerate);
+					$("input[name='ipTxt']").val(jsonobj.ipinfo[0].eth_net.ip); 
+					$("input[name='netmaskTxt']").val(jsonobj.ipinfo[0].eth_net.netmask);
+					$("input[name='gatewayTxt']").val(jsonobj.ipinfo[0].eth_net.gateway);
+					$("input[name='soft_version']").val(jsonobj.sysuser[0].soft_version);
+
+					// 显示通道数量
+					var vec = jsonobj.encode[0].venc_param;
+					for(var j=0;j<vec.length;j++){
+						var ulli = template('template_id',{vec:vec});
+						$("#menu_ul_li").html(ulli);
+					}
+
+					// 显示logo
+					var logo=jsonobj.syscontrol[0].display_log;
+					if(logo==1){
+					     $("#Falcon_Admin").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo").show();
+					     document.title = 'rtsp转rtmp推流器';
+					}else if(logo==0){
+					     $("#Falcon_Admin").hide();
+					     $("#logo_chinese").hide();
+					}else if(logo==2){
+					     $("#Falcon_Admin").hide();
+					     $("#logo_chinese").show();
+					     document.title = '金和智能转码器';
+						 $(".rtmp2_field").css("display","none");
+					}else if(logo==3){
+					     $("#Falcon_Admin_1").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo_1").show();
+					     document.title = '政凯秀直播';
+					}else if(logo==4){
+					     $("#Falcon_Admin_2").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo_2").show();
+					     document.title = '同位onvif推流器';
+					}
+
+					// 隐藏显示局域网
+					var enable = jsonobj.ipinfo[0].local_net.enable;
+					if(enable == 0){
+						 $("#enablegetway").css("display","none");
+					}else if(enable == 1){
+						 $("#enablegetway").css("display","block");
+					}
+				}
+			})
+		}
+
+		
+		// 获取rtsp流量带宽
+		function rtspBw() {
+			$.ajax({
+				type:'get',
+				url:'/jsonfile/rtspbw',
+				dataType:'text',
+				success:function(data){
+					var jsonobj2 = JSON.parse(data)
+					var jsonobj_bw = Number(jsonobj2)
+					var jsonobj_kb = Number(jsonobj_bw*8/1024).toFixed(2);
+					$("#rtsp_bw").val(jsonobj_kb+'Kbit/s');
+				}
+			})
+		}
+
+		// 获取rtmp流量带宽
+		function rtmpBw(){
+			$.ajax({
+				type:'get',
+				url:'/jsonfile/rtmpbw',
+				dataType: 'text',
+				success:function(data){
+					var jsonobj2 = JSON.parse(data)
+					var jsonobj_bw = Number(jsonobj2)
+					var jsonobj_kb = Number(jsonobj_bw*8/1024).toFixed(2);
+					$("#rtmp_bw").val(jsonobj_kb+'Kbit/s');
+				}
+			})
+		}
+
+		// 获取cpu占用率
+		function getCpu(){
+			$.ajax({
+				type:'get',
+				url:'/jsonfile/cpu',
+				dataType:'text',
+				success:function(data){
+					var jsonobj2 = JSON.parse(data);
+					$("#cpu_usage").val(jsonobj2);
+				}
+			})
+		}
+
+		// 获取内存占用率
+		function getMem(){
+			$.ajax({
+				type:'get',
+				url:'/jsonfile/mem',
+				dataType:'text',
+				success:function(data){
+					var jsonobj2 = JSON.parse(data);
+					$("#mem_usage").val(jsonobj2);
+				}
+			})
+		}
+
+		// 获取rtmp的信息
+		function getRtmp(){
+			$.ajax({
+				type:'get',
+				url:'/jsonfile/rtmpstatus',
+				dataType:'text',
+				success:function(data){
+					var jsonobj3 = JSON.parse(data);
+					var rtmp_1 = jsonobj3.rtmpstatus;
+					var ulli_1 = template('template_id_1',{rtmp_1:rtmp_1})
+					$("#menu_ul_li_1").html(ulli_1);
+
+					for (var i = 0; i < rtmp_1.length; i++) {
+                      if(rtmp_1[i] == '0'){
+                          $(".one").eq(i).css("background-color","red"); 
+                      }else if(rtmp_1[i] == '1'){
+                          $(".one").eq(i).css("background-color","yellow"); 
+                      }else if (rtmp_1[i] == '2') {
+                          $(".one").eq(i).css("background-color","green");
+                      }
+                  }
+				}
+			})
+		}
+
+		// 获取rtmp2的信息
+		function getRtmp2(){
+			$.ajax({
+				type:'get',
+				url:'/jsonfile/rtmpstatus1',
+				dataType:'text',
+				success:function(data){
+					var jsonobj3 = JSON.parse(data);
+					var rtmp_2 = jsonobj3.rtmpstatus1;
+					var ulli_2 = template('template_id_2',{rtmp_2:rtmp_2})
+					$("#menu_ulli_rtmp").html(ulli_2);
+
+					for (var i = 0; i < rtmp_2.length; i++) {
+                      	if(rtmp_2[i] == '0'){
+                          	$(".one_rtmp").eq(i).css("background-color","red"); 
+                      	}else if(rtmp_2[i] == '1'){
+                          	$(".one_rtmp").eq(i).css("background-color","yellow"); 
+                      	}else if (rtmp_2[i] == '2') {
+                          	$(".one_rtmp").eq(i).css("background-color","green");
+                      	}
+                  	}
+				}
+			})
+		}
+
+		// 获取rtsp的信息
+		function getRtsp(){
+			$.ajax({
+				type:'get',
+				url:'/jsonfile/rtspstatus',
+				dataType:'text',
+				success:function(data){
+					var jsonobj = JSON.parse(data);
+					var rtsp_1 = jsonobj.rtspstatus;
+					var ulli_rtsp = template('template_id_3',{rtsp_1:rtsp_1})
+					$("#menu_ulli_rtsp").html(ulli_rtsp);
+					for (var i = 0; i < rtsp_1.length; i++) {
+					  if(rtsp_1[i] == '0'){
+					      $(".rtsp_one").eq(i).css("background-color","red"); 
+					  }else if(rtsp_1[i] == '1'){
+					      $(".rtsp_one").eq(i).css("background-color","yellow"); 
+					  }else if (rtsp_1[i] == '2') {
+					       $(".rtsp_one").eq(i).css("background-color","green");
+					  }
+					}
+				}
+			})
+		}
+
+		// 获取udp的信息
+		function getUdp(){
+			$.ajax({
+				type:'get',
+				url:'/jsonfile/udpstatus',
+				dataType:'text',
+				success:function(data){
+					var jsonobj = JSON.parse(data);
+					var udp_1 = jsonobj.udpstatus;
+					var ulli_udp = template('template_id_4',{udp_1:udp_1})
+					$("#menu_udp").html(ulli_udp);
+					for (var i = 0; i < udp_1.length; i++) {
+					  if(udp_1[i] == '0'){
+					      $(".udp").eq(i).css("background-color","red"); 
+					  }else if(udp_1[i] == '1'){
+					      $(".udp").eq(i).css("background-color","yellow"); 
+					  }else if (udp_1[i] == '2') {
+					       $(".udp").eq(i).css("background-color","green");
+					  }
+					}
+				}
+			})
+		}
+
+		// 改变语言
+		function changeLan() {
+			var lan = $('#LanSle').val()
+
+			if(lan == "Chinese"){
+				window.location.href = "index.html";
+			}else{
+				window.location.href = "indexE.html";
+			}
+		}
+
+	</script>
+</body>
+</html>

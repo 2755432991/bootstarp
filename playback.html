@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/grid.css">
+	<link rel="stylesheet" href="css/text.css">
+	<link rel="stylesheet" href="css/default.css">
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/laydate/laydate.js"></script>
+	<script src="ckplayer/ckplayer.js"></script>
+	<script src="js/moment.js"></script>
+	<script src="js/m3u8-parser.min.js"></script>
+	<style>
+		<style type="text/css">
+		  body {
+		    padding: 0;
+		  }
+		  .header {
+		    clear: both;
+		    margin-bottom: 30px;
+		    border-bottom: 1px solid #eee;
+		  }
+		  .footer {
+		    background-color: #a2d7f5;
+		    height: 43px;
+		    width: 100%;
+		    position: absolute;
+		    left: 0;
+		    bottom: 0;
+		    line-height: 40px;
+		    font-size: 14px;
+		    color: #fff;
+		    text-align: center;
+		  }
+		  .time-rule {
+		      overflow: scroll;
+		      position: relative;
+		      height: 69px;
+		      margin: 0 auto;
+		      width: 100%;
+		      font-size: 12px;
+		      max-width: 1440px;
+		      background-color: #CCC;
+		  }
+		  .time-day {
+		      position: absolute;
+		      left:0;
+		      top:0;
+		      height: 100%;
+		      width: 1440px;
+		      cursor: pointer;
+		      /*background:#000;*/
+		  }   
+		  .time-minute {
+		      float: left;
+		      width: 1px;
+		      height: 8px;
+		      margin: 0;
+		      /*background: green;*/
+		  }
+		  .time-minute.active {
+		      background-color: green;
+		  }
+		  .time-text {
+		      float: left;
+		      width: 60px;
+		      border-left: 1px solid #999;
+		      border-top : 1px solid #999;
+		      -ms-user-select: none;
+		      user-select: none;
+		      text-align: center;
+		      height: 25px;
+		      line-height: 25px;
+		      box-sizing: border-box;
+		  }
+		  .time-00 {
+		      border-left : 0;
+		  }   
+		  .time-cursor {
+		      position: absolute;
+		      left:0;
+		      top:0;
+		      height: 35px;
+		      width: 2px;
+		      background-color: red;
+		      text-align: center;
+		  }
+		  .time-cursor-text {
+		      position: absolute;
+		      padding: 0 5px;
+		      width : 60px;
+		      left : -30px;
+		      top: 35px;
+		      border : 1px solid red;
+		      height: 15px;
+		      line-height: 15px;
+		      background-color: white;
+		      -ms-user-select: none;
+		      user-select: none;
+		  }
+		</style>
+	</style>
+</head>
+<body>
+	<div class="container_24">
+		<div id="header">
+			<div class="grid_12" id="logo">
+				<img src="images/logo_index.png" alt="logo" id="Falcon_Admin" style="display: none">
+				<img src="images/logo_index_1.jpg" alt="logo" id="Falcon_Admin_1" style="display: none">
+				<img src="images/logo_index_2.png" alt="logo" id="Falcon_Admin_2" style="display: none">
+				<h1 id="logo_chinese" style="font-size: 33px;color: #ffffff;display: none;margin-left: 20px;">金&nbsp和&nbsp智&nbsp能&nbsp转&nbsp码&nbsp器</h1>
+			</div>
+			<div style="float:right; margin-right:0px; margin-top:0px; padding-right:15px; padding-top:15px; color:rgb(255,255,255)">
+				<p>语言:&nbsp;
+					<select id='LanSle' onchange="changeLan()" >
+			           <option value="Chinese" selected="selected">中文</option>
+			　　　　　 <option value="English" >英文</option>
+					</select>
+				</p>
+				<p id="QQ_logo" style="margin-top:5px;font-size: 18px;display: none ">QQ :376440003</p>
+				<p id="QQ_logo_1" style="margin-top:5px;font-size: 18px;display: none ">QQ :396413296</p>
+				<p id="QQ_logo_2" style="margin-top:5px;font-size: 18px;display: none">QQ :1047314336</p>
+			</div>
+		</div>
+		<div class="grid_24" id="content">
+			<div id="content-inner">
+				<div class="grid_6" id="left">
+					<ul id="menu">
+						<li><h6 id="h6_un"><a href="index.html" id="status_display"><span>状态显示</span></a></h6></li>
+						<li><h6><a href="onvif.html"><span>onvif设备发现</span></a></h6></li>
+						<li><h6><a href="playback.html"><span>录像回放</span></a></h6></li>
+						<li><h6><a href="outputMain.html"><span>通道设置</span></a></h6></li>
+						<li><h6><a href="setNet.html"><span>系统设置</span></a></h6>
+							<ul id="menu_users">
+								<li><a href="setNet.html">公网口设置</a></li>
+								<li id="enablegetway" style="display: none;"><a href="setLan.html">局域网口设置</a></li>
+								<li id="g4"><a href="g4Set.html">4G设置</a></li>
+								<li><a href="setPassword.html">密码设置</a></li>
+								<li><a href="remserial.html">串口透传</a></li>
+								<li><a href="systemUpdate.html">系统更新</a></li>
+								<li><a href="fileRecovery.html">备份文件和恢复</a></li>
+								<li><a href="resdk.html">格式化存储设备</a></li>
+								<li><a href="reset.html">恢复出厂设置</a></li>
+								<li><a href="reboot.html">重启设置</a></li>
+								<li><a href="restart.html">定时重启</a></li>
+								<li class="last"><a href="startPush.html">定时推流</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="grid_18" id="right">
+					<div id="forms">
+						<form>
+							<div class="form">
+								<div class="title">
+									<h4>录像回放</h4>
+								</div>
+								<div class="fields">
+									<div class="field">
+										<div class="grid_11">选择日期：<input type="text" id="myDatePicker"></div>
+										<div class="grid_5">
+											通道：
+											<select name="selectChannel" id="selectChannel" onchange="changeSelect()">
+												<option value="0">1</option>
+												<option value="1">2</option>
+												<option value="2">3</option>
+												<option value="3">4</option>
+												<option value="4">5</option>
+												<option value="5">6</option>
+												<option value="6">7</option>
+												<option value="7">8</option>
+												<option value="8">9</option>
+												<option value="9">10</option>
+												<option value="10">11</option>
+												<option value="11">12</option>
+												<option value="12">13</option>
+												<option value="13">14</option>
+												<option value="14">15</option>
+												<option value="15">16</option>
+											</select>
+										</div>
+									</div>
+									<div class="field">
+										<div class="time-rule">
+											<div class="time-day"></div>
+											<div class="time-cursor">
+												<div class="time-cursor-text">00:00</div>
+											</div>
+										</div>
+									</div>
+									<div class="field">
+										<div id="player" style="width: 640px;height: 360px;"></div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid_24" id="footer"></div>
+		<div class="clear"></div>
+	</div>
+	<script>
+
+		var player = {};
+
+		// 日期选择
+		laydate.render({
+			elem: '#myDatePicker',
+			value: new Date(),
+			done:function(value,date){
+				reflashLine(value)
+			}
+		})
+
+		// 播放录像
+		function playRecord(url) {
+			var videoObj = {
+				container: '#player',
+				variable: 'player',
+				autoplay: false,
+				html5m3u8:true,
+				video: url
+			}
+			player = new ckplayer(videoObj)
+		}
+
+		//显示每一个小时的文本
+		function renderTimeTexts(){
+		    $(".time-day .time-text").remove();
+		    for(var i = 0; i< 24; i++){
+		        var $text = $("<div class='time-text'></div>");
+		        var m = moment().hour(i).minute(0).second(0);
+		        $text.text(m.format("HH:mm"));
+		        $text.addClass("time-" + m.format("HH"));
+		        $(".time-day").append($text);
+		    }
+		}
+
+		// 显示每一分钟
+		function renderTimeMinutes(width){
+		    $(".time-day .time-minute").remove();
+		    for (var i = 0; i < 1440; i++) {
+		        var $minute = $("<div class='time-minute'></div>");
+		        var m = moment().hour(0).minute(i);
+		        $minute.addClass("time-" + m.format("HH-mm"));
+		        $(".time-day").append($minute);
+		    }
+		}
+		
+		// 监听时间轴的鼠标事件
+		$(document).on("mousedown", ".time-cursor-text,.time-day", function (e) {
+		  // console.log(e);
+		    $(this).data("pageX", e.pageX);
+		}).on("mouseup", function (e) {
+		    if($(".time-cursor-text").data("changed")){
+		        onChangeTime(e);
+		        $(".time-cursor-text").removeData("changed");
+		    }
+		    $(".time-cursor-text,.time-day").removeData("pageX");
+		}).on("mousedown",".time-minute",function(e){
+		    onTimeUpdate();
+		});
+
+		// 更新游标的时间
+		function onTimeUpdate(width){
+		    if($(".time-cursor").position().left >= width + $(".time-day").position().left){
+		        $(".time-cursor")[0].style.left = (width - 1/width + $(".time-day").position().left) + "px";
+		    }
+		    var m = moment().hour(0).minute($(".time-cursor").position().left - $(".time-day").position().left);
+		    $(".time-cursor-text").text(m.format("HH:mm")).data("changed", true);
+		}
+
+
+		// 时间轴上浮标改变事件
+		function onChangeTime(e){
+
+			var left = e.pageX - $('.time-day').offset().left;
+			$('.time-cursor')[0].style.left = left + 'px';
+			let m = moment().hour(0).minute(left);
+			$('.time-cursor-text').text(m.format('HH:mm'));
+
+			// 拼接播放地址
+			var val = $('#myDatePicker').val() + ',' + $(".time-cursor-text").text() + ':00';
+			val = val.replace(/-/g,'/');
+			var start_time = new Date(val).getTime();
+			var end_time = new Date($('#myDatePicker').val().replace(/-/g,'/')).getTime() + 86400000;
+			var selectOption = $('#selectChannel').val();
+
+			// 拼接真实地址
+			var url = '/vod/index.m3u8?command=record&start_time=' + start_time + '&end_time=' + end_time + '&channel=record' + selectOption;
+
+			playRecord(url);
+		}
+
+		// 刷新时间轴，判断哪些时间有录像,传入时间
+		function reflashLine(value){
+			// 将时间转换成指定格式
+			value = value.replace(/-/g,'/');
+
+			// 将游标置0
+			$('.time-cursor')[0].style.left = 0
+			$('.time-cursor-text').text('00:00')
+
+			// 开始时间和结束时间的时间戳
+			var start_time = Math.round(new Date(value).getTime());
+			var end_time = parseInt(start_time) + 86400000;
+			// 选择的通道
+			var selectOption = $('#selectChannel').val();
+
+			// 拼接真实地址
+			var url = '/vod/index.m3u8?command=record&start_time=' + start_time + '&end_time=' + end_time + '&channel=record' + selectOption;
+
+			// 发送请求,解析m3u8文件
+			var videos = [];
+			$.ajax({
+				url: url,
+				success:function(data){
+					var parser = new m3u8Parser.Parser();
+					parser.push(data);
+					parser.end();
+
+					var parsedManifest = parser.manifest;
+					// 遍历对象的segments
+					parsedManifest.segments.forEach(function(item){
+					  var arr = item.uri.split('/');
+					  var hls = arr[arr.length - 1];
+					  var start = parseInt(hls.replace('.ts',''));
+					  var end = start + item.duration * 1000;
+
+					  videos.push({
+					    'start':start,
+					    'end':end
+					  });
+					});
+
+					$('.time-minute').removeClass('active');
+					// 遍历数组
+					for(var i=0;i<videos.length;i++){
+					    var startSecond = videos[i].start/1000;
+					    var endSecond = videos[i].end/1000;
+
+					    for(var j=startSecond;j<=endSecond;j++){
+					        var m = moment().hour(0).minute(0).second(j - start_time);
+					        $('.time-' + m.format("HH-mm")).addClass('active');
+					    }
+					}
+				}
+			})
+			playRecord(url);
+		}
+
+		// 监听通道改变事件
+		function changeSelect() {
+			var value = $('#myDatePicker').val()
+			reflashLine(value)
+		}
+
+		// 入口函数
+		$(function(){
+			// 判断是否登陆
+			var info = sessionStorage.getItem('access');
+			if(!info){
+				window.location.href="login.html";
+			}else{
+				showLogo()
+				renderTimeMinutes($('.time-day').width());
+				renderTimeTexts();
+
+				// 获取当前日期，刷新时间轴
+				var val = new Date().toLocaleDateString();
+				reflashLine(val)
+			}
+		})
+
+		// 显示logo
+		function showLogo() {
+			var info = sessionStorage.getItem('access');
+			$.ajax({
+				type:'post',
+				url:'/getConfig',
+				data:info,
+				success:function(data){
+					var jsonobj = data;
+
+					// 显示logo
+					var logo=jsonobj.syscontrol[0].display_log;
+					if(logo==1){
+					     $("#Falcon_Admin").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo").show();
+					     document.title = 'rtsp转rtmp推流器';
+					}else if(logo==0){
+					     $("#Falcon_Admin").hide();
+					     $("#logo_chinese").hide();
+					}else if(logo==2){
+					     $("#Falcon_Admin").hide();
+					     $("#logo_chinese").show();
+					     document.title = '金和智能转码器';
+					}else if(logo==3){
+					     $("#Falcon_Admin_1").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo_1").show();
+					     document.title = '政凯秀直播';
+					}else if(logo==4){
+					     $("#Falcon_Admin_2").show();
+					     $("#logo_chinese").hide();
+					     $("#QQ_logo_2").show();
+					     document.title = '同位onvif推流器';
+					}
+
+					// 隐藏显示局域网
+					var enable = jsonobj.ipinfo[0].local_net.enable;
+					if(enable == 0){
+						 $("#enablegetway").css("display","none");
+					}else if(enable == 1){
+						 $("#enablegetway").css("display","block");
+					}
+				}
+			})
+		}
+
+		// 改变语言
+		function changeLan() {
+			var lan = $('#LanSle').val()
+
+			if(lan == "Chinese"){
+				window.location.href = "playback.html";
+			}else{
+				window.location.href = "playbackE.html";
+			}
+		}
+
+	</script>
+</body>
+</html>
